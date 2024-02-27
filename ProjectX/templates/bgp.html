@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+<head>
+    {% load static %}
+    {% block title %}BGP Monitoring {% endblock %}
+</head>
+
+
+
+
+
+{% block content %}
+<div class="container">
+    <div class="form-container" id="form_input">
+        <form id="bgpForm" method="post">
+            {% csrf_token %}
+            <label for="asn_input">Enter the AS Number:</label><br>
+            <input type="text" id="asn_input" name="asn_input" required="required" placeholder="Enter ASN" />
+            <button type="submit" name="bgp_checker">BGP Checker</button>
+        </form>
+    </div>
+</div>
+
+
+{% if error %}
+<p>{{ error }}</p>
+{% else %}
+<table>
+    {% if result %}
+    <thead>
+        <tr>
+            <th>AS Number</th>
+            <th>AS Name</th>
+            <th>Source</th>
+            <th>Longitude</th>
+            <th>Latitude</th>
+            <th>Country</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ result.as_number }}</td>
+            <td>{{ result.as_name }}</td>
+            <td>{{ result.source }}</td>
+            <td>{{ result.longitude }}</td>
+            <td>{{ result.latitude }}</td>
+            <td>{{ result.country }}</td>
+        </tr>
+    </tbody>
+    {% endif %}
+</table>
+{%endif%}
+{% endblock %}
+
+{% block help %}
+<h2>BGP Monitoring Tips and Tricks</h2>
+<div class="help-content">
+    <p>Hey there, BGP navigator! Ready to explore the BGP world? Here's a quick guide:</p>
+    <p>-- <span style="color: rgb(10, 133, 233);">BGP Checker Magic:</span> Enter the IP address you're curious about,
+        hit "BGP Checker," and unveil the BGP details!</p>
+    <p>-- <span style="color: rgb(10, 133, 233);">Results Snapshot:</span> Get key information - IP address, AS number,
+        AS name, description, and country code.</p>
+    <p> Stuck? Dive into FAQs or give us a shout. BGP success awaits!</p>
+</div>
+{% endblock %}

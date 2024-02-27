@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     #my apps
     'landingpage',
     'sslmonitor',
+    'bgpMonitor',
 
     #django apps
     'django.contrib.admin',

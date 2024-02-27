@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('landingpage.urls')),
     path('sslmonitor/', include('sslmonitor.urls')),
+    path('bgpmonitor/', include('bgpMonitor.urls')),
 ]
