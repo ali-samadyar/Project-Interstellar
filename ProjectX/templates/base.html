@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interstellar | {% block title %} {% endblock %}</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/png">
+    <link rel="stylesheet" href="{% static 'base.css'%}">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{% static 'logo.png' %}" alt="App Logo">
+        </div>
+        <ul class="nav-menu">
+            <li><a href="../2/main.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#">DeviceHub</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">DeviceCatalog</a></li>
+                    <li><a href="#">VLAN</a></li>
+                    <li><a href="#">AutoHub</a></li>
+                </ul>
+            </li>
+            <li><a href="#">CertiVerse</a></li>
+            <li><a href="#">About </a></li>
+        </ul>
+    </nav>
+
+    <main class="content-area">
+        <section class="content-section">
+            {% block content %}
+            {% endblock %}
+        </section>
+
+        <aside class="help-section">
+            {% block help %}
+            {% endblock %}
+        </aside>
+
+    </main>
+</body>
+
+</html>
