@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+<head>
+    {% load static %}
+    <script src="{% static 'sslmonitor.js' %}"></script>
+</head>
+
+
+
+
+{% block content %}
+<!-- <link rel="stylesheet" href="{% static 'sslmonitor.css'%}"> -->
+
+<div class="container">
+    <div class="form-container" id="form_input">
+        <form id="sslForm" method="post">
+            {% csrf_token %}
+            <label for="url_Input">Enter a Domain:</label><br></br>
+            <input type="text" pattern="^([\w-]+\.)*([\w-]+\.[a-zA-Z]{2,})(\/[^\s]*)?$" id="url_Input" name="url_Input"
+                required="required" placeholder="Enter the Domain" />
+            <button type="submit" name="ssl_checker">SSL Checker</button>
+        </form>
+
+    </div>
+    <form action="{% url 'update_ssl_certificates' %}" method="post" class="update_form">
+        {% csrf_token %}
+        <button type="submit" name="update_ssl_db" onclick="alert('Table Updated!')" class="update_button">Update
+            Table</button>
+    </form>
+    <div class="result-text">
+        <p>Domain:</p>
+        <p>Remaining Days:</p>
+        <p>Expiration Date:</p>
+    </div>
+    <div class="certficate-info" id="result_output">
+        {% if remaining_days and expiration_date %}
+        <p id="domain">{{ domain }}</p>
+        <p id="remainingDaysInput">{{ remaining_days }}</p>
+        <p id="expirationDateInput">{{ expiration_date }}</p>
+        {% endif %}
+    </div>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Domain</th>
+            <th>Expiration Date</th>
+            <th>Remaining Days</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ssl_certificate in ssl_certificates %}
+        <tr>
+            <td>{{ ssl_certificate.domain }}</td>
+            <td>{{ ssl_certificate.expiration_date }}</td>
+            <td>{{ ssl_certificate.remaining_days }}</td>
+            <td>
+                <form method="post" action="{% url 'remove_ssl_certificate' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="domain" value="{{ ssl_certificate.domain }}" />
+                    <button type="submit" class="remove-button"
+                        onclick="return confirm('Are you sure you want to remove this domain?')">
+                        Remove
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
+{% block help %}
+<h2>SSL Monitoring Tips and Tricks</h2>
+<div class="help-content">
+    <p>Hey there, SSL superhero! Ready to rock your SSL game? Here's a quick guide:</p>
+    <p>-- <span style="color: rgb(10, 133, 233);">SSL Checker Magic:</span> Pop in the URL you're curious about, hit
+        "SSL Checker," and
+        witness the SSL secrets unfold!</p>
+    <p>-- <span style="color: rgb(10, 133, 233);">Results Snapshot:</span> Catch the key details - domain, days left,
+        and
+        the expiration date - in a quick glance.</p>
+    <p>-- <span style="color: rgb(10, 133, 233);">Update Table:</span> Keep your SSL table fresh with the "Update Table"
+        button. Click it, and voila! Your table is
+        up-to-date.</p>
+    <p>-- <span style="color: rgb(10, 133, 233);">Table Adventures:</span> Spot a rogue entry? Nix it with the "Remove"
+        button in the table.</p>
+    <p> Stuck? Dive into FAQs or give us a shout. SSL success awaits!</p>
+</div>
+
+{% endblock %}

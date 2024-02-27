@@ -1,0 +1,123 @@
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    height: 100vh;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    border: 1px solid #78290f;
+}
+
+.form-container {
+    display: flex;
+    flex: 3;
+    padding: 20px;
+    /* gap: 50%; */
+}
+
+.form-container input {
+    width: 218px;
+}
+
+.result-container {
+    flex: 1;
+}
+
+h2 {
+    text-align: center;
+    color: #15616d;
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #15616d;
+}
+
+input,
+button {
+    padding: 8px 10px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    background-color: #ff7d00;
+    color: #000;
+    cursor: pointer;
+}
+
+input:focus {
+    outline: none;
+    background-color: #15616d;
+    color: #fff;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #000;
+    background-color: #a1cca5;
+    border: 1px solid #78290f;
+    border-radius: 5px;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #78290f;
+}
+
+.remove-button {
+    background-color: #001524;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 2px;
+    cursor: pointer;
+}
+
+.remove-button:hover {
+    background-color: red;
+}
+
+.certficate-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: right;
+    /* margin-left: 500px; */
+    padding: 20px;
+    flex: 0.7;
+}
+
+.result-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    flex: 0.5;
+}
+
+#sslForm {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
