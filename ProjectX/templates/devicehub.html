@@ -28,10 +28,8 @@
                 <div class="form-column">
                     <label for="device_name">Device Name/ID:</label>
                     <input type="text" id="device_name" name="device_name" required>
-
                     <label for="ip_address">IP Address:</label>
                     <input type="text" id="ip_address" name="ip_address" required>
-
                     <label for="device_type">Device Type:</label>
                     <select id="device_type" name="device_type">
                         <option value="Router">Router</option>
@@ -42,17 +40,14 @@
                         <option value="WAF">WAF</option>
                         <option value="Load Balancer">Load Balancer</option>
                     </select>
-
                     <label for="rack_loc">Rack Number:</label>
                     <input type="text" id="rack_loc" name="rack_loc">
                 </div>
                 <div class="form-column">
                     <label for="manufacturer">Manufacturer:</label>
                     <input type="text" id="manufacturer" name="manufacturer">
-
                     <label for="model">Model:</label>
                     <input type="text" id="model" name="model">
-
                     <label for="location">Location:</label>
                     <input type="text" id="location" name="location">
                 </div>
@@ -88,19 +83,6 @@
             <td>{{ device.model }}</td>
             <td>{{ device.location }}</td>
             <td>{{device.rack_loc}}</td>
-            <td>
-                <button id="openEditDeviceModal" data-id="{{ device.id }}">Edit</button>
-                <div id="editDeviceModal" class="modal">
-                    <div class="modal-content">
-                        <h2>Edit Device</h2>
-                        <form action="{% url 'edit_device' id=device.id %}" method="post" id="editDeviceForm">
-                            {% csrf_token %}
-                            <!-- Include the fields for editing the device here -->
-                            <button type="submit">Update Device</button>
-                        </form>
-                    </div>
-                </div>
-            </td>
         </tr>
         {% endfor %}
     </tbody>
@@ -109,7 +91,7 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="{% static 'js/device_search.js' %}"></script>
 <script src="{% static 'js/device_add.js' %}"></script>
-<script src="{% static 'js/device_edit.js' %}"></script>
+<!-- <script src="{% static 'js/device_edit.js' %}"></script> -->
 <!-- <script src="{% static 'js/device_list.js' %}"></script> -->
 
 
