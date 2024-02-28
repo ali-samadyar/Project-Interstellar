@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+<head>
+    {% load static %}
+    {% block title %}Device Hub: Add Device {% endblock %}
+    <link rel="stylesheet" href="{% static 'css/devicehub.css'%}">
+</head>
+
+
+
+
+
+{% block content %}
+<div class="add_device_container">
+    <form action="{% url 'add_device' %}" method="post" class="add_device_form">
+        {% csrf_token %}
+        <label for="device_name">Device Name/ID:</label>
+        <input type="text" id="device_name" name="device_name" required>
+
+        <label for="ip_address">IP Address:</label>
+        <input type="text" id="ip_address" name="ip_address" required>
+
+        <label for="device_type">Device Type:</label>
+        <select id="device_type" name="device_type">
+            <option value="Router">Router</option>
+            <option value="Switch">Switch</option>
+            <option value="Firewall">Firewall</option>
+            <option value="Server">Server</option>
+            <option value="Console">Console</option>
+            <option value="WAF">WAF</option>
+            <option value="Load Balancer">Load Balancer</option>
+        </select>
+
+        <label for="manufacturer">Manufacturer:</label>
+        <input type="text" id="manufacturer" name="manufacturer">
+
+        <label for="model">Model:</label>
+        <input type="text" id="model" name="model">
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location">
+
+        <label for="rack_loc">Rack Number:</label>
+        <input type="text" id="rack_loc" name="rack_loc">
+
+        <button type="submit" name="repeat">Add & Repeat</button>
+        <button type="submit" name="submit_back">Add & Back</button>
+    </form>
+    <a href="{% url 'devicehub' %}"><button>Cancel</button></a>
+</div>
+
+{% endblock %}
+
+{% block help %}
+
+{% endblock %}

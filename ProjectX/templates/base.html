@@ -6,21 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interstellar | {% block title %} {% endblock %}</title>
-    <link rel="icon" href="{% static 'favicon.png' %}" type="image/png">
-    <link rel="stylesheet" href="{% static 'base.css'%}">
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
 </head>
 
 <body>
     <nav class="navbar">
         <div class="logo">
-            <img src="{% static 'logo.png' %}" alt="App Logo">
+            <img src="{% static 'images/logo.png' %}" alt="App Logo">
         </div>
         <ul class="nav-menu">
             <li><a href="http://127.0.0.1:8000">Home</a></li>
             <li class="dropdown">
-                <a href="#">DeviceHub</a>
+                <a href="http://127.0.0.1:8000/devicehub">DeviceHub</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">DeviceCatalog</a></li>
+                    <li><a href="http://127.0.0.1:8000/devicehub">deviceList</a></li>
                     <li><a href="#">VLAN</a></li>
                     <li><a href="#">AutoHub</a></li>
                 </ul>
@@ -29,7 +29,7 @@
                 <a href="#">Online Observatory</a>
                 <ul class="dropdown-menu">
                     <li><a href="http://127.0.0.1:8000/sslmonitor">sslObserver</a></li>
-                    <li><a href="#">bgpObserver</a></li>
+                    <li><a href="http://127.0.0.1:8000/bgpmonitor">bgpObserver</a></li>
                     <li><a href="#">------</a></li>
                 </ul>
             </li>

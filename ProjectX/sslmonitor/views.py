@@ -14,17 +14,23 @@ def sslchecker_function(request):
 
             url_input = request.POST.get('url_Input')
             processed_remaining_days = get_ssl_certificate_info(url_input)
-            # Display result in 'result_output'
-            context = {'domain': processed_remaining_days[0],'remaining_days': processed_remaining_days[2], 'expiration_date': processed_remaining_days[1]}
-            domain = processed_remaining_days[0]
-            expiration_date = processed_remaining_days[1]
-            remaining_days = processed_remaining_days[2]
 
-            # Add result to the database
-            if not SSLCertificate.objects.filter(domain=domain).exists():
-                SSLCertificate.objects.create(domain=domain, expiration_date=expiration_date, remaining_days=remaining_days)
+            if processed_remaining_days is not None:
+                # Display result in 'result_output'
+                context = {'domain': processed_remaining_days[0],'remaining_days': processed_remaining_days[2], 'expiration_date': processed_remaining_days[1]}
+                domain = processed_remaining_days[0]
+                expiration_date = processed_remaining_days[1]
+                remaining_days = processed_remaining_days[2]
+
+                # Add result to the database
+                if not SSLCertificate.objects.filter(domain=domain).exists():
+                    SSLCertificate.objects.create(domain=domain, expiration_date=expiration_date, remaining_days=remaining_days)
+                else:
+                    SSLCertificate.objects.filter(domain=domain).update(expiration_date=expiration_date, remaining_days=remaining_days)
             else:
-                SSLCertificate.objects.filter(domain=domain).update(expiration_date=expiration_date, remaining_days=remaining_days)
+                # Display error message in 'result_output'
+                context = {'error_message': 'Invalid URL'}
+                
         elif 'update_ssl_db' in request.POST:
             # Code for Update SSL Certificates button
             ssl_certificates = SSLCertificate.objects.all()

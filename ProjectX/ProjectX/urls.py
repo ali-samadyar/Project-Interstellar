@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('landingpage.urls')),
     path('sslmonitor/', include('sslmonitor.urls')),
     path('bgpmonitor/', include('bgpMonitor.urls')),
+    path('devicehub/', include('deviceHub.urls')),
 ]

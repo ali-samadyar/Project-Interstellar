@@ -3,7 +3,6 @@ body {
     padding: 0;
     font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
     background: linear-gradient(to right, #a8a8a8, #e0e0e0);
-    /* background-color: linear-gradient(to right, #f18305, #0116d3); */
 }
 
 .header {
@@ -21,10 +20,10 @@ body {
     cursor: pointer;
 }
 
-.logo img:hover {
+/* .logo img:hover {
     transform: scale(1.1);
     transition: 1.5s;
-}
+} */
 
 .main-menu {
     display: flex;

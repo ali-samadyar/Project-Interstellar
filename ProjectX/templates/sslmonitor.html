@@ -17,8 +17,7 @@
         <form id="sslForm" method="post">
             {% csrf_token %}
             <label for="url_Input">Enter a Domain:</label><br></br>
-            <input type="text" pattern="^([\w-]+\.)*([\w-]+\.[a-zA-Z]{2,})(\/[^\s]*)?$" id="url_Input" name="url_Input"
-                required="required" placeholder="Enter the Domain" />
+            <input type="text" id="url_Input" name="url_Input" required="required" placeholder="Enter the Domain" />
             <button type="submit" name="ssl_checker">SSL Checker</button>
         </form>
 
@@ -75,20 +74,18 @@
 
 {% block help %}
 <h2>SSL Monitoring Tips and Tricks</h2>
-<div class="help-content">
+<div>
     <p>Hey there, SSL superhero! Ready to rock your SSL game? Here's a quick guide:</p>
-    <p>-- <span style="color: rgb(10, 133, 233);">SSL Checker Magic:</span> Pop in the URL you're curious about, hit
+    <p>🔑 SSL Checker Magic: Pop in the URL you're curious about, hit
         "SSL Checker," and
         witness the SSL secrets unfold!</p>
-    <p>-- <span style="color: rgb(10, 133, 233);">Results Snapshot:</span> Catch the key details - domain, days left,
-        and
-        the expiration date - in a quick glance.</p>
-    <p>-- <span style="color: rgb(10, 133, 233);">Update Table:</span> Keep your SSL table fresh with the "Update Table"
-        button. Click it, and voila! Your table is
-        up-to-date.</p>
-    <p>-- <span style="color: rgb(10, 133, 233);">Table Adventures:</span> Spot a rogue entry? Nix it with the "Remove"
+    <p>🔍 Results Snapshot: Catch the key details - domain, days left,
+        and the expiration date - in a quick glance.</p>
+    <p>🔄 Update Table: Keep your SSL table fresh with the "Update Table"
+        button. Click it, and voila! Your table is up-to-date.</p>
+    <p>😨 Table Adventures: Spot a rogue entry? Nix it with the "Remove"
         button in the table.</p>
-    <p> Stuck? Dive into FAQs or give us a shout. SSL success awaits!</p>
+    <p>🤔 Stuck? Dive into FAQs or give us a shout. SSL success awaits!</p>
 </div>
 
 {% endblock %}

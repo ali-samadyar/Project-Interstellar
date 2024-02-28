@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'landingpage',
     'sslmonitor',
     'bgpMonitor',
+    'deviceHub',
 
     #django apps
     'django.contrib.admin',
@@ -116,9 +117,7 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-STATIC_URL = '/static/css/'  
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static/css'),
-    os.path.join(BASE_DIR, 'static/images'), 
-    os.path.join(BASE_DIR, 'static/js'),
+    os.path.join(BASE_DIR, 'static'),
 ]

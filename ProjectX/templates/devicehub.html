@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+<head>
+    {% load static %}
+    {% block title %}Device Hub {% endblock %}
+</head>
+
+
+
+
+
+{% block content %}
+<div class="container">
+    <div class="form-container" id="form_input">
+        <label for="searchBox">Search:</label>
+        <input type="text" id="searchBox" placeholder="Enter device name/IP">
+        <button id="searchButton">Search</button>
+        <button id="clearButton">Clear</button>
+    </div>
+    <button onclick="openAddDeviceModal()">Add Device</button>
+</div>
+<div id="addDeviceModal" class="modal">
+    <div class="modal-content">
+        <h2>Add Device</h2>
+        <form action="{% url 'add_device' %}" method="post">
+            {% csrf_token %}
+            <div class="form-containerX">
+                <div class="form-column">
+                    <label for="device_name">Device Name/ID:</label>
+                    <input type="text" id="device_name" name="device_name" required>
+
+                    <label for="ip_address">IP Address:</label>
+                    <input type="text" id="ip_address" name="ip_address" required>
+
+                    <label for="device_type">Device Type:</label>
+                    <select id="device_type" name="device_type">
+                        <option value="Router">Router</option>
+                        <option value="Switch">Switch</option>
+                        <option value="Firewall">Firewall</option>
+                        <option value="Server">Server</option>
+                        <option value="Console">Console</option>
+                        <option value="WAF">WAF</option>
+                        <option value="Load Balancer">Load Balancer</option>
+                    </select>
+
+                    <label for="rack_loc">Rack Number:</label>
+                    <input type="text" id="rack_loc" name="rack_loc">
+                </div>
+                <div class="form-column">
+                    <label for="manufacturer">Manufacturer:</label>
+                    <input type="text" id="manufacturer" name="manufacturer">
+
+                    <label for="model">Model:</label>
+                    <input type="text" id="model" name="model">
+
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location">
+                </div>
+            </div>
+            <button type="submit">Add Device</button>
+            <span onclick="closeAddDeviceModal()" class="close">&times;</span>
+        </form>
+    </div>
+</div>
+
+<table id="devicesTable" class="table">
+    <thead>
+        <tr>
+            <th>Device ID</th>
+            <th>Device Name</th>
+            <th>IP Address</th>
+            <th>Device Type</th>
+            <th>Manufacturer</th>
+            <th>Model</th>
+            <th>Location</th>
+            <th>Rack Location</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="devicesList">
+        {% for device in devices %}
+        <tr>
+            <td>{{ device.id }}</td>
+            <td>{{ device.device_name }}</td>
+            <td>{{ device.ip_address }}</td>
+            <td>{{ device.device_type }}</td>
+            <td>{{ device.manufacturer }}</td>
+            <td>{{ device.model }}</td>
+            <td>{{ device.location }}</td>
+            <td>{{device.rack_loc}}</td>
+            <td>
+                <button id="openEditDeviceModal" data-id="{{ device.id }}">Edit</button>
+                <div id="editDeviceModal" class="modal">
+                    <div class="modal-content">
+                        <h2>Edit Device</h2>
+                        <form action="{% url 'edit_device' id=device.id %}" method="post" id="editDeviceForm">
+                            {% csrf_token %}
+                            <!-- Include the fields for editing the device here -->
+                            <button type="submit">Update Device</button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="{% static 'js/device_search.js' %}"></script>
+<script src="{% static 'js/device_add.js' %}"></script>
+<script src="{% static 'js/device_edit.js' %}"></script>
+<!-- <script src="{% static 'js/device_list.js' %}"></script> -->
+
+
+
+{% endblock %}
+
+{% block help %}
+<h2>Device Hub Quick Guide</h2>
+<p>Here's a quick guide to help you get started with the Device Hub:</p>
+<p>➕ Adding a Device:
+    Click "Add Device," fill in the details – name, IP, type, etc., and voila! Your device is in the hub.</p>
+<p>🧐 Search Magic:Looking for something? Type in the device name or IP, hit search, and watch the table do its
+    thing.
+</p>
+<p>✍🏻 Edit on the Fly:
+    Need to tweak device details? Hit "Edit" next to the device, make your changes, and you're set.</p>
+<p>🤔 Got Questions?
+    We're here for you! Reach out if you need a hand or have a tech mystery to solve.</p>
+<h4>Happy Device Wrangling! 🚀</h4>
+
+{% endblock %}
