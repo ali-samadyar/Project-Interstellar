@@ -245,7 +245,7 @@ table {
     border-radius: 5px;
     margin: 10px;
     height: 80vh;
-    overflow-y: scroll;
+    overflow: scroll;
 }
 
 th,

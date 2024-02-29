@@ -1,26 +1,30 @@
-$(document).ready(function () {
-    $("#searchButton").on("click", function () {
-        var searchTerm = $("#searchBox").val().toLowerCase();
-        $.ajax({
-            url: '/devicehub/search/',
-            data: { q: searchTerm },
-            type: 'GET',
-            success: function (data) {
-                updateTable(data);
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
+// device_search.js
+
+document.addEventListener('DOMContentLoaded', function () {
+    const searchBox = document.getElementById('searchBox');
+    const devicesList = document.getElementById('devicesList');
+
+    searchBox.addEventListener('input', function () {
+        const searchText = searchBox.value.toLowerCase();
+        filterDevices(searchText);
     });
 
-    function updateTable(data) {
-        $("#devicesTable tbody").empty();
-        var devices = JSON.parse(data);
-        for (var i = 0; i < devices.length; i++) {
-            var device = devices[i].fields;
-            var newRow = "<tr><td>" + device.device_name + "</td><td>" + device.ip_address + "</td><td>" + device.device_type + "</td><td>" + device.manufacturer + "</td><td>" + device.model + "</td><td>" + device.location + "</td><td>" + device.rack_loc + "</td><td><a href='#'>Edit</a></td></tr>";
-            $("#devicesTable tbody").append(newRow);
+    function filterDevices(searchText) {
+        const rows = devicesList.getElementsByTagName('tr');
+
+        for (let i = 0; i < rows.length; i++) {
+            const columns = rows[i].getElementsByTagName('td');
+            let rowVisible = false;
+
+            for (let j = 0; j < columns.length; j++) {
+                const columnText = columns[j].innerText.toLowerCase();
+                if (columnText.includes(searchText)) {
+                    rowVisible = true;
+                    break;
+                }
+            }
+
+            rows[i].style.display = rowVisible ? '' : 'none';
         }
     }
 });
