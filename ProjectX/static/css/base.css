@@ -237,13 +237,15 @@ input:focus {
 }
 
 table {
-    width: 99%;
+    width: 98%;
     border-collapse: collapse;
     color: #000;
     background-color: #e0e0e0;
     border: 1px solid #141413;
     border-radius: 5px;
     margin: 10px;
+    height: 80vh;
+    overflow-y: scroll;
 }
 
 th,
@@ -392,4 +394,6 @@ td {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    appearance: none;
+    /* outline: 0; */
 }
