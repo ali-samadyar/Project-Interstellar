@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'sslmonitor',
     'bgpMonitor',
     'deviceHub',
+    'deviceControl',
 
     #django apps
     'django.contrib.admin',
