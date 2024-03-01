@@ -29,4 +29,4 @@ def remove_device(request):
         Device.objects.filter(id=device_id).delete()
 
     return redirect('devicehub')
-    
+

@@ -244,16 +244,55 @@ table {
     border: 1px solid #141413;
     border-radius: 5px;
     margin: 10px;
-    /* height: 80vh;
-    overflow: scroll; */
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+    width: 5%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 15%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 16%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+    width: 10%;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+    width: 9%;
+}
+
+th:nth-child(6),
+td:nth-child(6) {
+    width: 13%;
+}
+
+th:nth-child(7),
+td:nth-child(7) {
+    width: 5%;
+}
+
+th:nth-child(8),
+td:nth-child(8) {
+    width: 7%;
 }
 
 th,
 td {
-    padding: 8px;
+    padding: 5px;
     text-align: left;
     border: 1px solid #78290f;
 }
+
 
 .remove-button {
     background-color: #001524;
@@ -262,7 +301,7 @@ td {
     padding: 7px 14px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    /* display: inline-block; */
     font-size: 12px;
     margin: 2px;
     cursor: pointer;
@@ -396,4 +435,11 @@ td {
     box-sizing: border-box;
     appearance: none;
     /* outline: 0; */
+}
+
+.devicehub-action-buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
 }
