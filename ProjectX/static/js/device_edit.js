@@ -1,78 +1,38 @@
-$(document).on('click', '#openEditDeviceModal', function () {
-    const deviceId = $(this).data('id');
+function editDevice(id) {
+    // Fetch device data and populate the edit modal
+    fetch(`device_info/${id}/`)
+        .then(response => response.json())
+        .then(data => {
+            // Set the input values in the edit modal
+            document.getElementById("edit_device_name").value = data.device_name;
+            document.getElementById("edit_ip_address").value = data.ip_address;
+            document.getElementById("edit_device_type").value = data.device_type;
+            document.getElementById("edit_manufacturer").value = data.manufacturer;
+            document.getElementById("edit_model").value = data.model;
+            document.getElementById("edit_location").value = data.location;
+            document.getElementById("edit_rack_loc").value = data.rack_loc;
 
-    // AJAX request to fetch device details
-    $.ajax({
-        type: 'GET',
-        url: `/devicehub/device_list_all/${deviceId}/`,
-        success: function (response) {
-            // Populate the edit modal fields with the fetched data
-            $('#editDeviceModal #edit_device_id').val(response.id);
-            $('#editDeviceModal #device_name').val(response.device_name);
-            $('#editDeviceModal #ip_address').val(response.ip_address);
-            // Add more fields as needed
+            // Show the edit modal
+            document.getElementById("editDeviceModal").style.display = "block";
 
-            // Display the editDeviceModal
-            openEditDeviceModal();
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
-});
+            // Update the form action attribute
+            document.getElementById("edit-device-form").action = `update_device/${id}/`;
+        })
+        .catch(error => console.error('Error fetching device data:', error));
 
-function openEditDeviceModal() {
-    // Display the editDeviceModal
-    document.getElementById('editDeviceModal').style.display = 'block';
+
+    // When the update button is clicked
+    document.getElementById("update-device-btn").onclick = function () {
+        // Send the form data to the server
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", `update_device/${id}/`);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Close the modal
+                document.getElementById("editDeviceModal").style.display = "none";
+            }
+        };
+        xhr.send(new URLSearchParams(new FormData(document.getElementById("edit-device-form"))));
+    };
 }
-
-function closeEditDeviceModal() {
-    // Close the editDeviceModal
-    $('#editDeviceModal').css('display', 'none');
-}
-
-// Add a submit handler for the edit device form
-$(document).on('submit', '#editDeviceForm', function (event) {
-    event.preventDefault();
-
-    // Get the device ID and device data from the form
-    const deviceId = $('#edit_device_id').val();
-    const deviceData = $(this).serialize();
-
-    // AJAX request to update the device
-    $.ajax({
-        type: 'POST',
-        url: `/devicehub/edit_device/${deviceId}/`,
-        data: deviceData,
-        success: function (response) {
-            // Close the editDeviceModal
-            closeEditDeviceModal();
-
-            // Update the table row with the new data (optional)
-            // ...
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
-});
-
-$(document).on('click', '#openEditDeviceModal', function () {
-    const deviceId = $(this).data('device-id');
-    const deviceName = $(this).data('device-name');
-    const ipAddress = $(this).data('device-ip-address');
-    const deviceType = $(this).data('device-type');
-    const manufacturer = $(this).data('device-manufacturer');
-    const model = $(this).data('device-model');
-    const location = $(this).data('device-location');
-    const rackLoc = $(this).data('device-rack-loc');
-
-    // Populate the editing form fields with the fetched data
-    $('#editDeviceModal #edit_device_id').val(deviceId);
-    $('#editDeviceModal #device_name').val(deviceName);
-    $('#editDeviceModal #ip_address').val(ipAddress);
-    // Add more fields as needed
-
-    // Display the editDeviceModal
-    openEditDeviceModal();
-});

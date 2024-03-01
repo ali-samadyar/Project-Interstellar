@@ -5,6 +5,10 @@ urlpatterns = [
     path('', views.device_hub, name='devicehub'),
     path('add_device/', views.add_device, name='add_device'),
     path('remove_device/', views.remove_device, name='remove_device'),
+    path('update_device/<int:device_id>/', views.update_device, name='update_device'),
+    path('device_info/<int:device_id>/', views.get_device_info, name='get_device_info'),
+    
+
          
 
     # path('search/', views.search, name='search'),
