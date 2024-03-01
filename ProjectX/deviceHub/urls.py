@@ -4,6 +4,8 @@ from . import views
 urlpatterns = [
     path('', views.device_hub, name='devicehub'),
     path('add_device/', views.add_device, name='add_device'),
+    path('remove_device/', views.remove_device, name='remove_device'),
+         
 
     # path('search/', views.search, name='search'),
     # path('device_list_all/', views.device_list_all, name='device_list_all'),

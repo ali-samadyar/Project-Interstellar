@@ -84,6 +84,15 @@
             <td>{{ device.model }}</td>
             <td>{{ device.location }}</td>
             <td>{{device.rack_loc}}</td>
+            <td>
+                <button onclick="openEditDeviceModal()">Edit</button>
+                <form method="post" action="{% url 'remove_device' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="device_id" value="{{ device.id }}">
+                    <button type="submit" class="remove-button"
+                        onclick="return confirm('Are you sure you want to remove this device?')">Remove</button>
+                </form>
+            </td>
         </tr>
         {% endfor %}
     </tbody>

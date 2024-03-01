@@ -21,3 +21,12 @@ def add_device(request):
         form = DeviceForm()
 
     return render(request, 'add_device.html', {'form': form})
+
+
+def remove_device(request):
+    if request.method == 'POST':
+        device_id = request.POST.get('device_id')
+        Device.objects.filter(id=device_id).delete()
+
+    return redirect('devicehub')
+    

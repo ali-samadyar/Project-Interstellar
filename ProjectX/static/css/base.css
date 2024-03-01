@@ -244,8 +244,8 @@ table {
     border: 1px solid #141413;
     border-radius: 5px;
     margin: 10px;
-    height: 80vh;
-    overflow: scroll;
+    /* height: 80vh;
+    overflow: scroll; */
 }
 
 th,
