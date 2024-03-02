@@ -35,7 +35,8 @@ def get_interface_info(request, device_ip):
 
 
 def ping_device(request, device_ip):
-    response = os.system("ping " + device_ip)
+    count = ' -c 2 '
+    response = os.system("ping"+ count + device_ip)
     if response == 0:
         success = True
     else:
