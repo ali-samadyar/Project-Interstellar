@@ -510,3 +510,24 @@ td {
         background-position: 0 50%, 0 calc(0% - 2px), 0 calc(100% + 2px), 50% 50%, 50% calc(0% - 2px), 50% calc(100% + 2px), 100% 50%, 100% calc(0% - 2px), 100% calc(100% + 2px);
     }
 }
+
+/* About CSS */
+
+.about-container {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+    padding: 20px;
+    margin: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 40px 20px rgba(0, 0, 0, 0.20);
+}
+
+.about-container h1,
+h2 {
+    color: #15616d;
+    /* align-self: first baseline; */
+
+}
