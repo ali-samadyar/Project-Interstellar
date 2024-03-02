@@ -3,6 +3,7 @@
 <head>
     {% load static %}
     {% block title %}LookUP{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 {% block content %}
@@ -12,11 +13,13 @@
             {% csrf_token %}
             <label for="url_Input">Enter a Domain:</label><br></br>
             <input type="text" id="url_Input" name="url_Input" required="required" placeholder="Enter the Domain" />
-            <button type="submit" name="ssl_checker">whois</button>
+            <input type="text" id="search-box" placeholder="Search the table"></input>
+            <button type="submit" name="whois">whois</button>
         </form>
     </div>
 </div>
-<table>
+
+<!-- <table id="current-result-table">
     <thead>
         <tr>
             <th>Hostname</th>
@@ -31,12 +34,12 @@
             <th>SOA</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="current-result-table-body">
         <tr>
             <td>{{ whois_data.hostname }}</td>
             <td>{{ whois_data.registrar }}</td>
-            <td>{{ whois_data.creation_date }}</td>
-            <td>{{ whois_data.expiration_date }}</td>
+            <td>{{ whois_data.creation_date}}</td>
+            <td>{{ whois_data.expiration_date}}</td>
             <td>{{ whois_data.abuse_email }}</td>
             <td>
                 {% for a_record in lookup_data.records.A %}
@@ -66,5 +69,43 @@
             </td>
         </tr>
     </tbody>
+</table> -->
+<h2>History</h2>
+<table id="history-table">
+    <thead>
+        <tr>
+            <th>Hostname</th>
+            <th>Registrar</th>
+            <th>Creation Date</th>
+            <th>Expiration Date</th>
+            <th>Abuse Email</th>
+            <th>A</th>
+            <th>CNAME</th>
+            <th>MX</th>
+            <th>NS</th>
+            <th>SOA</th>
+            <!-- <th>Last Update</th> -->
+        </tr>
+    </thead>
+    <tbody id="history-table-body">
+        {% for entry in history %}
+        <tr>
+            <td>{{ entry.hostname }}</td>
+            <td>{{ entry.registrar }}</td>
+            <td>{{ entry.creation_date }}</td>
+            <td>{{ entry.expiration_date }}</td>
+            <td>{{ entry.abuse_email }}</td>
+            <td>{{ entry.a_record }}</td>
+            <td>{{ entry.cname_record }}</td>
+            <td>{{ entry.mx_record }}</td>
+            <td>{{ entry.ns_record }}</td>
+            <td>{{ entry.soa_record }}</td>
+            <!-- <td>{{ entry.last_update }}</td> -->
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
+
+<script src="{% static 'js/lookup_live_search.js' %}"></script>
+
 {% endblock %}
