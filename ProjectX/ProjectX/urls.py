@@ -24,4 +24,5 @@ urlpatterns = [
     path('bgpmonitor/', include('bgpMonitor.urls')),
     path('devicehub/', include('deviceHub.urls')),
     path('devicecontrol/interface-mng', include('deviceControl.urls')),
+    path('lookups/', include('lookups.urls')),
 ]

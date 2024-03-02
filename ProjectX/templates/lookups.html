@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+<head>
+    {% load static %}
+    {% block title %}LookUP{% endblock %}
+</head>
+
+{% block content %}
+<div class="container">
+    <div class="form-container" id="form_input">
+        <form id="sslForm" method="post" action="{% url 'lookups' %}">
+            {% csrf_token %}
+            <label for="url_Input">Enter a Domain:</label><br></br>
+            <input type="text" id="url_Input" name="url_Input" required="required" placeholder="Enter the Domain" />
+            <button type="submit" name="ssl_checker">whois</button>
+        </form>
+    </div>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Hostname</th>
+            <th>Registrar</th>
+            <th>Creation Date</th>
+            <th>Expiration Date</th>
+            <th>Abuse Email</th>
+            <th>A</th>
+            <th>CNAME</th>
+            <th>MX</th>
+            <th>NS</th>
+            <th>SOA</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ whois_data.hostname }}</td>
+            <td>{{ whois_data.registrar }}</td>
+            <td>{{ whois_data.creation_date }}</td>
+            <td>{{ whois_data.expiration_date }}</td>
+            <td>{{ whois_data.abuse_email }}</td>
+            <td>
+                {% for a_record in lookup_data.records.A %}
+                {{ a_record.address }}<br>
+                {% endfor %}
+            </td>
+            <td>
+                {% for cname_record in lookup_data.records.CNAME %}
+                {{ cname_record.target }}<br>
+                {% endfor %}
+            </td>
+            <td>
+                {% for mx_record in lookup_data.records.MX %}
+                {{ mx_record.exchange }} (Priority: {{ mx_record.priority }})<br>
+                {% endfor %}
+            </td>
+            <td>
+                {% for ns_record in lookup_data.records.NS %}
+                {{ ns_record.nameserver }}<br>
+                {% endfor %}
+            </td>
+            <td>
+                {% for soa_record in lookup_data.records.SOA %}
+                <b>Name Server:</b> {{ soa_record.nameserver }}<br>
+                <b>Hostmaster:</b> {{ soa_record.hostmaster }}<br>
+                {% endfor %}
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

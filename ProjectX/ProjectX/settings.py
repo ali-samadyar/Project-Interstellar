@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bgpMonitor',
     'deviceHub',
     'deviceControl',
+    'lookups',
 
     #django apps
     'django.contrib.admin',
