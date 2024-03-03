@@ -19,7 +19,7 @@
     </div>
 </div>
 
-<h2>History</h2>
+<h2 style="margin-left: 20px;">History</h2>
 <table id="history-table">
     <thead>
         <tr>
@@ -56,5 +56,27 @@
 </table>
 
 <script src="{% static 'js/lookup_live_search.js' %}"></script>
+
+{% endblock %}
+
+{% block help %}
+<h3>Need Help? Don't Worry, We've Got You Covered!</h3>
+<div>
+    <p>Hey there, tech enthusiast! Ready to dive into the world of domain exploration? Here's a quick rundown to
+        make your Lookup experience smoother than a well-optimized algorithm.</p>
+
+    <p><strong>How to Lookup:</strong> Simply toss a domain into the magic box, hit the "whois" button, and
+        voilà! You're on your way to uncovering the mysteries behind that URL.</p>
+
+    <p>What's under the hood? Well, we're tapping into the WHOIS database, the superhero archive of domain details.
+        It spills the beans on domain ownership, registration dates, and more.</p>
+
+    <p><strong>Pro Tip:</strong> Wondering what WHOIS is? It's like peeking behind the curtain of the internet. For
+        the curious minds, take a detour to the <a href="https://en.wikipedia.org/wiki/WHOIS" target="_blank">WHOIS
+            Wikipedia page</a>. It's the backstage pass to the web's secrets.</p>
+
+    <p>Still, perplexed or encountering a virtual road bump? Fret not! Check out the <a
+            href="http://127.0.0.1:8000/about">About</a> page!</p>
+</div>
 
 {% endblock %}
