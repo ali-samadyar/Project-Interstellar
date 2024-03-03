@@ -30,7 +30,7 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 2em;
-    margin: 20px 0;
+    margin-top: 50px;
 }
 
 .main-menu li {
@@ -55,12 +55,13 @@ body {
 }
 
 .footer {
-    position: center;
-    bottom: 0;
+    position: fixed;
+    bottom: 0px;
     text-align: center;
-    padding: 20px;
-    /* background-color: white; */
-    /* width: max-content; */
+    width: 100%;
+    border-radius: 0;
+    z-index: 1;
+    font-size: 20px;
     background: linear-gradient(to right, #f18305, #0116d3);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

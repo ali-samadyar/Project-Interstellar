@@ -145,6 +145,7 @@ body {
 
 
 
+
 /* ssl monitoring page css */
 
 .container {
@@ -357,6 +358,7 @@ td {
 
 
 
+
 /* BGP monitoring page CSS */
 
 #bgpForm {
@@ -364,6 +366,8 @@ td {
     display: flex;
     flex-direction: column;
 }
+
+
 
 
 
@@ -443,6 +447,10 @@ td {
     align-items: center;
     gap: 5px;
 }
+
+
+
+
 
 
 
