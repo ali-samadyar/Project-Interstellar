@@ -8,7 +8,6 @@
 
 
 
-
 {% block content %}
 <div class="container">
     <div class="form-container" id="form_input">
@@ -22,11 +21,8 @@
 </div>
 
 
-{% if error %}
-<p>{{ error }}</p>
-{% else %}
 <table>
-    {% if result %}
+    {% if saved_results %}
     <thead>
         <tr>
             <th>AS Number</th>
@@ -38,6 +34,7 @@
         </tr>
     </thead>
     <tbody>
+        {% for result in saved_results %}
         <tr>
             <td>{{ result.as_number }}</td>
             <td>{{ result.as_name }}</td>
@@ -46,10 +43,10 @@
             <td>{{ result.latitude }}</td>
             <td>{{ result.country }}</td>
         </tr>
+        {% endfor %}
     </tbody>
     {% endif %}
 </table>
-{%endif%}
 {% endblock %}
 
 {% block help %}
