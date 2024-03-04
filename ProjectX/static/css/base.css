@@ -542,6 +542,15 @@ h2 {
 
 }
 
+.about-image-1 {
+    position: relative;
+    left: 2160px;
+    bottom: 680px;
+    width: 400px;
+    opacity: 0.3;
+
+}
+
 
 /* Footer CSS */
 .footer {

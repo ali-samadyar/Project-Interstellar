@@ -3,7 +3,7 @@ from django.shortcuts import render
 from deviceHub.models import Device
 from django.http import JsonResponse
 from netmiko import ConnectHandler
-from .credentials import general_cred
+from .credentials import general_cred, f5_cred
 import os
 
 
