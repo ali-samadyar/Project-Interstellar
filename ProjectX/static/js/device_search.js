@@ -1,6 +1,6 @@
-// device_search.js
 
 document.addEventListener('DOMContentLoaded', function () {
+    // const uses for when when don`t want to change the value of the variable
     const searchBox = document.getElementById('searchBox');
     const devicesList = document.getElementById('devicesList');
 
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function filterDevices(searchText) {
         const rows = devicesList.getElementsByTagName('tr');
-
+        // let is for when you want to change the value of the variable
         for (let i = 0; i < rows.length; i++) {
             const columns = rows[i].getElementsByTagName('td');
             let rowVisible = false;

@@ -20,10 +20,6 @@ body {
     cursor: pointer;
 }
 
-/* .logo img:hover {
-    transform: scale(1.1);
-    transition: 1.5s;
-} */
 
 .main-menu {
     display: flex;

@@ -2,9 +2,10 @@
 $(document).ready(function () {
     $('.device-name').click(function (e) {
         e.preventDefault();
+        //var is function scoped 
         var device_ip = $(this).data('device-ip');
         $('#loading-indicator').show();
-        // Ping device IP
+        // Ping device IP (check availability)
         $.ajax({
             url: 'interface-mng/device/' + device_ip + '/ping/',
             type: 'GET',
@@ -32,19 +33,16 @@ $(document).ready(function () {
                         },
                         error: function () {
                             $('#loading-indicator').hide();
-                            // Handle error case, e.g., display an alert
                             alert('Error loading data. Please try again.');
                         }
                     });
                 } else {
                     $('#loading-indicator').hide();
-                    // Device is not available, show alert
                     alert('Device is not available.');
                 }
             },
             error: function () {
                 $('#loading-indicator').hide();
-                // Handle error case, e.g., display an alert
                 alert('Error pinging the device. Please try again.');
             }
         });

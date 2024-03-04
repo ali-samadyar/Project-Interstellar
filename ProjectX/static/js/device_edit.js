@@ -3,7 +3,6 @@ function editDevice(id) {
     fetch(`device_info/${id}/`)
         .then(response => response.json())
         .then(data => {
-            // Set the input values in the edit modal
             document.getElementById("edit_device_name").value = data.device_name;
             document.getElementById("edit_ip_address").value = data.ip_address;
             document.getElementById("edit_device_type").value = data.device_type;
@@ -12,10 +11,8 @@ function editDevice(id) {
             document.getElementById("edit_location").value = data.location;
             document.getElementById("edit_rack_loc").value = data.rack_loc;
 
-            // Show the edit modal
             document.getElementById("editDeviceModal").style.display = "block";
 
-            // Update the form action attribute
             document.getElementById("edit-device-form").action = `update_device/${id}/`;
         })
         .catch(error => console.error('Error fetching device data:', error));
@@ -23,13 +20,11 @@ function editDevice(id) {
 
     // When the update button is clicked
     document.getElementById("update-device-btn").onclick = function () {
-        // Send the form data to the server
         const xhr = new XMLHttpRequest();
         xhr.open("POST", `update_device/${id}/`);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onload = function () {
             if (xhr.status === 200) {
-                // Close the modal
                 document.getElementById("editDeviceModal").style.display = "none";
             }
         };

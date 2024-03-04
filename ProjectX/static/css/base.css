@@ -2,7 +2,6 @@ body {
     font-family: sans-serif;
     margin: 0;
     padding: 0;
-    /* background-color: #f5f5f5; */
     font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
     background-color: #dfe3ee;
     background-size: cover;
@@ -78,16 +77,10 @@ body {
 }
 
 .navbar {
-    /* background-image: linear-gradient(to right, #2e98df 0%, #007bff 100%); */
-    /* background-image: linear-gradient(to right, #6f5e9b 25%, #4f3299 100%); */
     background-image: linear-gradient(to right, #797878 25%, #443d3d 100%);
 }
 
-/* .logo span{
-    font-size: 30px;
-    color: #f7f7f7;
-    margin-left: 5px;
-} */
+
 .nav-menu li a:hover {
     color: #f5f5f5;
     border-bottom: 2px solid #fff;
@@ -112,7 +105,6 @@ body {
 }
 
 .content-section {
-    /* padding: 300px; */
     flex: 1;
     height: 100vh;
     overflow: auto;
@@ -177,7 +169,6 @@ body {
     display: flex;
     flex: 3;
     padding: 20px;
-    /* gap: 50%; */
 }
 
 .form-container input {
@@ -193,7 +184,6 @@ label {
     display: flex;
     margin-bottom: 5px;
     color: #15616d;
-    /* justify-content: center; */
     align-items: center;
 
 }
@@ -204,7 +194,6 @@ button {
     border: none;
     border-radius: 5px;
     margin: 5px;
-    /* background-color: #ff7d00; */
     background-color: #2ecc71;
     color: #000;
     cursor: pointer;
@@ -302,7 +291,6 @@ td {
     padding: 7px 14px;
     text-align: center;
     text-decoration: none;
-    /* display: inline-block; */
     font-size: 12px;
     margin: 2px;
     cursor: pointer;
@@ -317,7 +305,6 @@ td {
     flex-direction: column;
     justify-content: center;
     align-items: right;
-    /* margin-left: 500px; */
     padding: 20px;
     flex: 0.7;
 }
@@ -438,7 +425,6 @@ td {
     border-radius: 4px;
     box-sizing: border-box;
     appearance: none;
-    /* outline: 0; */
 }
 
 .devicehub-action-buttons {
@@ -459,7 +445,6 @@ td {
 .interface-container {
     display: flex;
     justify-content: space-around;
-    /* align-items: center; */
     padding: 20px;
     flex: 1;
 }
@@ -535,8 +520,7 @@ td {
 .about-container {
     display: flex;
     flex-direction: column;
-    /* justify-content: center;
-    align-items: center; */
+
     padding: 20px;
     margin: 20px;
     background-color: #fff;
@@ -547,6 +531,28 @@ td {
 .about-container h1,
 h2 {
     color: #15616d;
-    /* align-self: first baseline; */
 
+}
+
+.about-image {
+    position: relative;
+    left: 2100px;
+    bottom: 600px;
+    width: 500px;
+
+}
+
+
+/* Footer CSS */
+.footer {
+    /* position: fixed; */
+    bottom: 0px;
+    text-align: center;
+    width: 100%;
+    border-radius: 0;
+    z-index: 1;
+    font-size: 20px;
+    background: linear-gradient(to right, #f18305, #0116d3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
