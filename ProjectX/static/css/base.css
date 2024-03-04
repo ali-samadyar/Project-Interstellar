@@ -520,7 +520,7 @@ td {
 .about-container {
     display: flex;
     flex-direction: column;
-
+    z-index: -1;
     padding: 20px;
     margin: 20px;
     background-color: #fff;
@@ -531,24 +531,30 @@ td {
 .about-container h1,
 h2 {
     color: #15616d;
+    z-index: 1;
 
+}
+
+.about-container p {
+    color: #000;
+    z-index: 1;
 }
 
 .about-image {
-    position: relative;
-    left: 2100px;
-    bottom: 600px;
-    width: 500px;
-
+    position: absolute;
+    z-index: 0;
+    opacity: 0.18;
+    width: 800px;
+    left: 300px;
 }
 
 .about-image-1 {
-    position: relative;
-    left: 2160px;
-    bottom: 680px;
-    width: 400px;
-    opacity: 0.3;
-
+    position: absolute;
+    z-index: 0;
+    opacity: 0.15;
+    width: 600px;
+    left: 410px;
+    top: 860px;
 }
 
 
