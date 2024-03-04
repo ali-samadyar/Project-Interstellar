@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}VLAN Manager{% endblock %}
+
+{% block content %}
+<div class="vlan-container">
+    <div class="device-list-container">
+        <h2> Choose one or more devices</h2>
+        <form method="post" action="{% url 'vlan_manager' %}" class="device-list-form">
+            {% csrf_token %}
+            {% for device in devices %}
+            <label class="device-checkbox">
+                <input type="checkbox" name="selected_devices" value="{{ device.id }}">
+                {{ device.device_name }} ({{ device.ip_address }})
+            </label>
+            {% endfor %}
+        </form>
+    </div>
+
+    <div class="vlan-input-container">
+        <form method="post" action="{% url 'vlan_manager' %}">
+            {% csrf_token %}
+            <label for="vlan_id">VLAN ID:</label>
+            <input type="text" id="vlan_id" name="vlan_id" required>
+            <label for="vlan_name">VLAN Name:</label>
+            <input type="text" id="vlan_name" name="vlan_name" required>
+            <button type="submit">Create VLAN</button>
+        </form>
+        <div class="device-results-container">
+            {% if messages %}
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>VLAN Name</th>
+                <th>VLAN ID</th>
+                <th>Devices</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vlan in vlans %}
+            <tr>
+                <td>{{ vlan.vlan_name }}</td>
+                <td>{{ vlan.vlan_id }}</td>
+                <td>
+                    {% for device in vlan.devices.all %}
+                    {{ device.device_ip }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}

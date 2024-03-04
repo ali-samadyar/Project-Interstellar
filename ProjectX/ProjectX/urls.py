@@ -23,6 +23,6 @@ urlpatterns = [
     path('sslmonitor/', include('sslmonitor.urls')),
     path('bgpmonitor/', include('bgpMonitor.urls')),
     path('devicehub/', include('deviceHub.urls')),
-    path('devicecontrol/interface-mng', include('deviceControl.urls')),
+    path('devicecontrol/', include('deviceControl.urls')),
     path('lookups/', include('lookups.urls')),
 ]

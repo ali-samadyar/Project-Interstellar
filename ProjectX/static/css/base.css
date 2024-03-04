@@ -565,3 +565,54 @@ h2 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+
+
+
+
+
+
+/* vlan css */
+
+.vlan-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.device-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* gap: 10px; */
+    padding: 7px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 40px 20px rgba(0, 0, 0, 0.20);
+}
+
+.device-list-container form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px;
+    /* padding: 5px; */
+    margin-bottom: 20px;
+
+}
+
+.device-checkbox {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.device-checkbox input {
+    margin-right: 5px;
+}
+
+.vlan-input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 5px;
+    margin-top: 40px;
+}
