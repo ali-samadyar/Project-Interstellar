@@ -10,5 +10,6 @@ urlpatterns = [
     path('/device/<str:device_ip>/interface/', views.get_interface_info, name='get_interface_info'),
     path('/device/<str:device_ip>/ping/', views.ping_device, name='ping_device'), 
     path('vlan', views.vlan_manager, name='vlan_manager'),
+    path('command-runner/', views.show_command_runner, name='show_command_runner'),
     
 ]

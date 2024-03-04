@@ -593,7 +593,7 @@ h2 {
 .device-list-container form {
     display: flex;
     flex-wrap: wrap;
-    gap: 100px;
+    gap: 50px;
     /* padding: 5px; */
     margin-bottom: 20px;
 
@@ -602,7 +602,7 @@ h2 {
 .device-checkbox {
     display: flex;
     align-items: center;
-    margin-top: 20px;
+    /* margin-top: 5px; */
 }
 
 .device-checkbox input {
@@ -615,4 +615,24 @@ h2 {
     gap: 20px;
     padding: 5px;
     margin-top: 40px;
+}
+
+/* command-runner css */
+
+.command-input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 5px;
+    margin-top: 40px;
+}
+
+.command-input-container input:focus {
+    outline: none;
+    background-color: #000000;
+    color: #00ff22;
+    font-family: monospace;
+    font-size: 14px;
+    height: 80px;
+
 }

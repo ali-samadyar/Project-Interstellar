@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Show Command Runner{% endblock %}
+
+{% block content %}
+<div class="vlan-container">
+    <div class="device-list-container">
+        <h2> Choose one or more devices</h2>
+        <form method="post" action="{% url 'show_command_runner' %}" class="device-list-form">
+            {% csrf_token %}
+            {% for device in devices %}
+            <label class="device-checkbox">
+                <input type="checkbox" name="selected_devices" value="{{ device.id }}">
+                {{ device.device_name }} ({{ device.ip_address }})
+            </label>
+            {% endfor %}
+        </form>
+    </div>
+
+    <div class="command-input-container">
+        <form method="post" action="{% url 'show_command_runner' %}">
+            {% csrf_token %}
+            <label for="command">Command:</label>
+            <input type="text" id="command" name="command" required style="width: 400px;">
+            <button type="submit">Run Command</button>
+        </form>
+    </div>
+
+    <div class="command-results-container">
+        {% if error %}
+        <p class="error-message">{{ error }}</p>
+        {% endif %}
+
+        {% if results %}
+        <h3>Command Results:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Device IP</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for device_ip, result in results.items %}
+                <tr>
+                    <td>{{ device_ip }}</td>
+                    <td>
+                        <pre>{{ result|safe }}</pre>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

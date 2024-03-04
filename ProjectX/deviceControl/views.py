@@ -135,3 +135,35 @@ def vlan_manager(request):
         return redirect('vlan_manager')
 
     return render(request, 'vlan_manager.html', {'devices': devices, 'vlans': vlans})
+
+
+def show_command_runner(request):
+    devices = Device.objects.all()
+
+    if request.method == 'POST':
+        selected_device_ids = request.POST.getlist('selected_devices')
+        command = request.POST.get('command')
+
+        if not command.strip().lower().startswith('show'):
+            error = "Invalid command. Please enter a command starting with 'SHOW'."
+            return render(request, 'show_command_runner.html', {'devices': devices, 'error': error})
+
+        results = {}
+
+        for device_id in selected_device_ids:
+            try:
+                device = Device.objects.get(id=device_id)
+                device = general_cred 
+                device['ip'] = device.ip_address
+                device['device_type'] = 'cisco_ios'               
+                connection = ConnectHandler(**device)
+                result = connection.send_command(command)
+                connection.disconnect()
+                results[device.ip_address] = result
+            except Exception as e:
+                error = f"Error executing command on device {device.ip_address}: {str(e)}"
+                return render(request, 'show_command_runner.html', {'devices': devices, 'error': error})
+
+        return render(request, 'show_command_runner.html', {'devices': devices, 'results': results})
+
+    return render(request, 'show_command_runner.html', {'devices': devices})
