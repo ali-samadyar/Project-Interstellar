@@ -31,21 +31,42 @@ $(document).ready(function () {
                                 var nameField;
                                 if (device_manufacturer === 'Cisco') {
                                     ipField = interface_info.ip_address;
-                                    nameField = interface_info.interfaces;
+                                    nameField = interface;
                                 } else if (device_manufacturer === 'Fortinet') {
                                     ipField = interface_info.ip;
                                     ipField = ipField.split(' ')[0];
                                     nameField = interface_info.name;
-                                } else if (device_manufacturer === 'f5') {
-                                    ipField = interface_info.ip_address;
                                 }
                                 row.append('<td>' + nameField + '</td>');
                                 row.append('<td>' + ipField + '</td>');
                                 row.append('<td>' + interface_info.status + '</td>');
-                                row.append('<td><button class="turn-on-off-button">Turn On/Off</button></td>');
+                                row.append('<td><button class="turn-on-off-button" data-interface="' + nameField + '" data-action="no-shut">Turn On</button><button class="turn-on-off-button" data-interface="' + nameField + '" data-action="shut">Turn Off</button></td>');
                                 interface_table_body.append(row);
                             }
-
+                            $('.turn-on-off-button').click(function (e) {
+                                e.preventDefault();
+                                var interface = $(this).data('interface');
+                                var action = $(this).data('action');
+                                var device_ip = device_manufacturer === 'Cisco' ? device_ip : device_ip.split(':')[1]; // Use the IP address for non-Cisco devices
+                                interface = encodeURIComponent(interface);
+                                if (confirm('Are you sure you want to ' + action + ' this interface?')) {
+                                    $.ajax({
+                                        url: 'device/' + device_ip + '/interface/' + interface + '/' + action + '/',
+                                        type: 'POST',
+                                        data: {},
+                                        success: function (data) {
+                                            if (data.success) {
+                                                location.reload();
+                                            } else {
+                                                alert('Error changing the interface status. Please try again.');
+                                            }
+                                        },
+                                        error: function () {
+                                            alert('Error changing the interface status. Please try again.');
+                                        }
+                                    });
+                                }
+                            });
                             $('#interface-table').show();
                             $('#loading-indicator').hide();
                         },

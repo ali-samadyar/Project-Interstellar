@@ -19,12 +19,15 @@
             </thead>
             <tbody>
                 {% for device in devices %}
+                {% if device.2 == 'Cisco' or device.2 == 'Fortinet' %}
+
                 <tr>
                     <td><a href="#" class="device-name" data-device-ip="{{ device.1 }}"
                             data-device-manufacturer="{{ device.2}}">{{ device.0 }}</a></td>
                     <td>{{ device.1 }}</td>
                     <td>{{ device.2 }}</td>
                 </tr>
+                {% endif %}
                 {% empty %}
                 <tr>
                     <td colspan="2">No devices found.</td>
@@ -32,6 +35,7 @@
                 {% endfor %}
             </tbody>
         </table>
+
 
     </div>
 
