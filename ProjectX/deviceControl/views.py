@@ -1,4 +1,4 @@
-import subprocess
+import platform
 from django.shortcuts import render, redirect
 from deviceHub.models import Device
 from .models import VlanInventory
@@ -18,11 +18,11 @@ def device_data(request):
 
 def get_interface_info(request, device_ip):
     device = Device.objects.get(ip_address=device_ip)
-
+    manufacturer = device.manufacturer
     device = general_cred
     device['ip'] = device_ip
 
-    if device['manufacturer'] == 'cisco':
+    if manufacturer == 'Cisco':
         device['device_type'] = 'cisco_ios'
         connection = ConnectHandler(**device)
         command = 'show ip interface brief'
@@ -36,21 +36,32 @@ def get_interface_info(request, device_ip):
                 ip_address = fields[1]
                 status = fields[5]
                 interfaces[interface] = {'ip_address': ip_address, 'status': status}
-    elif device['manufacturer'] == 'fortinet':
+    elif manufacturer == 'Fortinet':
         device['device_type'] = 'fortinet'
         connection = ConnectHandler(**device)
         command = 'get system interface'
         output = connection.send_command(command)
         connection.disconnect()
         interfaces = {}
-        for line in output.split('\n'):
-            fields = line.split()
-            if fields:
-                interface = fields[0]
-                ip_address = fields[3]
-                status = fields[4]
-                interfaces[interface] = {'ip_address': ip_address, 'status': status}
-    elif device['manufacturer'] == 'f5':
+        interfaces = output.split('== [ ')[1:]
+        parsed_interfaces = [
+            {'name': name.split('   ')[0], 'ip': 'N/A', 'status': 'N/A'}
+            for name in (section.split('name: ')[1].split('\n')[0] for section in interfaces)
+        ]
+        for idx, section in enumerate(interfaces):
+            if ' ip: ' in section:
+                name = section.split('name: ')[1].split('   ')[0]
+                ip = section.split(' ip: ')[1].split('   ')[0]
+                status = section.split(' status: ')[1].split('   ')[0]
+                parsed_interfaces[idx]['name'] = name
+                parsed_interfaces[idx]['ip'] = ip
+                parsed_interfaces[idx]['status'] = status
+                interfaces = parsed_interfaces
+                
+
+       
+
+    elif manufacturer == 'f5':
         device['device_type'] = 'f5'
         connection = ConnectHandler(**device)
         command = 'show net interface'
@@ -70,12 +81,13 @@ def get_interface_info(request, device_ip):
 
 
 def ping_device(request, device_ip):
-    count = ' -c 2 '
+    count = ' -n 2 ' if platform.system().lower() == 'windows' else ' -c 2 '
     response = os.system("ping"+ count + device_ip)
     if response == 0:
         success = True
     else:
         success = False
+        
     return JsonResponse({'success': success})
 
 
