@@ -22,7 +22,7 @@
                 {% if device.2 == 'Cisco' or device.2 == 'Fortinet' %}
 
                 <tr>
-                    <td><a href="#" class="device-name" data-device-ip="{{ device.1 }}"
+                    <td><a href="#" class="device-name" data-device-name="{{device.0}}" data-device-ip="{{ device.1 }}"
                             data-device-manufacturer="{{ device.2}}">{{ device.0 }}</a></td>
                     <td>{{ device.1 }}</td>
                     <td>{{ device.2 }}</td>
@@ -41,7 +41,7 @@
 
     <div class="inter_list_class">
 
-        <h2>Interface List</h2>
+        <h2 id="selected-device-info">Interface List</h2>
         <div class="loading-indicator" id="loading-indicator">
         </div>
         <table id="interface-table" style="display: none;">

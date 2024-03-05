@@ -60,17 +60,16 @@ def get_interface_info(request, device_ip):
                 
     return JsonResponse({'interfaces': interfaces})
 
-def device_interface_action(request, device_ip, interface, action):
+def device_interface_action(request, device_ip, encoded_interface_name, action):
+    interface = unquote(encoded_interface_name)
     if request.method == 'POST':
         device = Device.objects.get(ip_address=device_ip)
         device_cred = general_cred
         device_cred['ip'] = device_ip
-       
-        
-
+             
         try:
             if device.manufacturer == 'Cisco':
-                interface = unquote(interface)
+                # interface = unquote(interface)
                 # print(interface)
                 device_type = 'cisco_ios'
                 if action == 'shut':
@@ -85,8 +84,8 @@ def device_interface_action(request, device_ip, interface, action):
                     commands = ['config system interface', 'edit ' + interface, 'set status up', 'end']
             else:
                 return JsonResponse({'success': False, 'message': 'Unsupported device manufacturer.'})
-
-            connection = ConnectHandler(**device_cred, device_type=device_type)
+            device_cred['device_type'] = device_type
+            connection = ConnectHandler(**device_cred)
             connection.enable()
             output = connection.send_config_set(commands)
             connection.disconnect()

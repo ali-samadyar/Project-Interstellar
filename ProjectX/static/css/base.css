@@ -504,6 +504,15 @@ td {
     }
 }
 
+#shut-button:hover {
+    background-color: #f00606;
+    color: #fff;
+}
+
+#no-shut-button:hover {
+    background-color: #15616d;
+    color: #ffffff;
+}
 
 
 
