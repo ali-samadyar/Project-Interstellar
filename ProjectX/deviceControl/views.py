@@ -183,18 +183,17 @@ def show_command_runner(request):
         for device_id in selected_device_ids:
             try:
                 device = Device.objects.get(id=device_id)
-                device_cred = general_cred 
+                device_cred = general_cred.copy()  # Use a copy to avoid modifying the original dict
                 device_cred['ip'] = device.ip_address
                 device_cred['device_type'] = 'cisco_ios'               
                 connection = ConnectHandler(**device_cred)
                 result = connection.send_command(command)
                 connection.disconnect()
-                results[device.ip_address] = result
+                results[device.ip_address] = {'result': result, 'error': None}
             except Exception as e:
-                error = f"Error executing command on device {device.ip_address}: {str(e)}"
-                return render(request, 'show_command_runner.html', {'devices': devices, 'error': error})
+                results[device.ip_address] = {'result': None, 'error': str(e)}
 
-        return render(request, 'show_command_runner.html', {'devices': devices, 'results': results})
+        return render(request, 'show_command_runner.html', {'devices': devices, 'results': results, 'command': command})
 
     return render(request, 'show_command_runner.html', {'devices': devices})
 

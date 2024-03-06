@@ -43,14 +43,22 @@
                 <tr>
                     <th>Device IP</th>
                     <th>Result</th>
+                    <th>Error</th>
                 </tr>
             </thead>
             <tbody>
-                {% for device_ip, result in results.items %}
+                {% for device_ip, data in results.items %}
                 <tr>
                     <td>{{ device_ip }}</td>
                     <td>
-                        <pre>{{ result|safe }}</pre>
+                        {% if data.result %}
+                        <pre>{{ data.result|safe }}</pre>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if data.error %}
+                        <p class="error-message">{{ data.error }}</p>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
