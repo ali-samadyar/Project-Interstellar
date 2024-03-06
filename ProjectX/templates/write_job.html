@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 
+<head>
+    {% load static %}
+
+</head>
+
 {% block content %}
-<div class="vlan-container">
-    <div class="device-list-container">
-        <h2>Choose one or more devices</h2>
-        <form method="post" action="{% url 'write_memory' %}" class="device-list-checkbox-form">
+<div class="write-job-container">
+    <form method="post" action="{% url 'write_memory' %}" class="device-list-checkbox-form">
+        <div class="device-list-container">
+            <h2>Choose one or more devices</h2>
             {% csrf_token %}
             {% for device in devices %}
             {% if device.manufacturer == 'Cisco' %}
@@ -14,27 +19,19 @@
             </label>
             {% endif %}
             {% endfor %}
-
-        </form>
-    </div>
-    <div class="write-action-section">
-        <div class="write-action-section-info">
-            <!-- Add your creative and fun content here -->
-            <h2>Let the Magic Happen! ✨</h2>
-            <p>Witness the power of technology as we secure your configurations!</p>
-            <!-- Add more creative elements as needed -->
         </div>
-
-        <button type="submit">Write Memory</button> <br></br>
-        <div class="loading-indicator" id="loading-indicator">
+        <div class="write-action-section">
+            <button type="submit">Write Memory</button> <br></br>
+            <div class="loading-indicator" id="loading-indicator">
+            </div>
+            <div class="write-action-results-container">
+                {% if messages %}
+                {% for message in messages %}
+                <p>{{ message }}</p>
+                {% endfor %}
+                {% endif %}
+            </div>
         </div>
-        <div class="write-action-results-container">
-            <p>TEST</p>
-            {% if error %}
-            <p class="error-message">{{ error }}</p>
-            {% endif %}
-        </div>
-
-    </div>
+    </form>
 </div>
 {% endblock %}

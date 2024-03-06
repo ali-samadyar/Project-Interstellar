@@ -719,6 +719,12 @@ h2 {
 
 /* write job css */
 
+.write-job-container {
+    display: flex;
+
+    margin: 20px;
+    padding: 20px;
+}
 
 .write-action-section {
     display: flex;
@@ -734,11 +740,12 @@ h2 {
     width: 240px;
     height: 90px;
     font-size: 30px;
-    margin-top: 200px;
+    margin-left: 200px;
     margin-bottom: 50px;
 }
 
 .write-action-results-container {
     color: red;
     margin-top: 50px;
+    margin-left: 200px;
 }

@@ -163,8 +163,6 @@ def vlan_manager(request):
 
     return render(request, 'vlan_manager.html', {'devices': devices, 'vlans': vlans})
 
-
-
 def show_command_runner(request):
     devices = Device.objects.all()
 
@@ -200,27 +198,32 @@ def show_command_runner(request):
 
 def write_memory(request):
     devices = Device.objects.all()
-    
+
     if request.method == 'POST':
-        selected_device = request.POST.getlist('selected_devices')
+        selected_devices = request.POST.getlist('selected_devices')
         error_messages = []
         success_messages = []
-        for device_ip in selected_device:
+
+        for device_id in selected_devices:
             try:
-                device = Device.objects.get(ip_address=device_ip)
-                device = general_cred 
-                device['ip'] = device_ip
-                device['device_type'] = 'cisco_ios'
-                connection = ConnectHandler(**device)
+                device = Device.objects.get(id=device_id)
+                device_cred = general_cred
+                device_cred['ip'] = device.ip_address
+                device_cred['device_type'] = 'cisco_ios'
+                
+                connection = ConnectHandler(**device_cred)
                 output = connection.send_command('write memory')
                 connection.disconnect()
-                success_messages.append(f"Write memory successful on device {device_ip}")
+                
+                success_messages.append(f"Write memory successful on device {device.device_name}")
             except Exception as e:
-                error_messages.append(f"Error writing memory on device {device_ip}: {str(e)}")
+                error_messages.append(f"Error writing memory on device {device.device_name}: {str(e)}")
+
         for error_message in error_messages:
             messages.error(request, error_message)
         for success_message in success_messages:
             messages.success(request, success_message)
+
         return redirect('write_memory')
-    
-    return render(request, 'write_job.html', {'devices': devices}) 
+
+    return render(request, 'write_job.html', {'devices': devices})
