@@ -2,7 +2,8 @@
 
 <head>
     {% load static %}
-
+    {% block title %}Write Memory{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 {% block content %}
@@ -34,4 +35,16 @@
         </div>
     </form>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/writeJob_select_validation.js' %}"></script>
+
+{% endblock %}
+
+{% block help %}
+<h2>Write Memory 📝</h2>
+<p>🚀 Take control and persist your changes on Cisco devices with the Write Memory feature!</p>
+<p>Select one or more Cisco devices, click "Write Memory," and watch as your configurations are saved to the startup
+    configuration.</p>
+<p>Ensure that the selected devices are reachable and properly configured before attempting to write to memory. This
+    action is crucial for preserving your changes even after a device reboot.</p>
 {% endblock %}
