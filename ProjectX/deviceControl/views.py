@@ -107,7 +107,6 @@ def ping_device(request, device_ip):
         
     return JsonResponse({'success': success})
 
-
 def vlan_manager(request):
     devices = Device.objects.all()
     vlans = VlanInventory.objects.all()
@@ -123,34 +122,35 @@ def vlan_manager(request):
         for device_ip in selected_devices:
             try:
                 device = Device.objects.get(ip_address=device_ip)
-                device = general_cred 
-                device['ip'] = device_ip
-                device['device_type'] = 'cisco_ios'
-                connection = ConnectHandler(**device)
-                vlan_command = f"vlan {vlan_id}\nname {vlan_name}"
-                output = connection.send_config_set(vlan_command)
+                device_cred = general_cred 
+                device_cred['ip'] = device_ip
+                device_cred['device_type'] = 'cisco_ios'
+                connection = ConnectHandler(**device_cred)
+                output = connection.send_config_set([f"vlan {vlan_id}", f"name {vlan_name}"])
                 connection.disconnect()
-
-                if 'Error' in output:
+                output_lines = output.splitlines()
+                error_detected = any("Error" in line for line in output_lines)
+                if error_detected:
                     error_messages.append(f"Failed to configure VLAN on device {device_ip}: {output}")
-                else:
-                    # Check if the VLAN already exists for this device
-                    existing_vlan = VlanInventory.objects.filter(
-                        vlan_name=vlan_name,
-                        vlan_id=vlan_id,
-                        devices=device
-                    ).first()
+                # else:
+                #     # Check if the VLAN already exists for this device
+                #     existing_vlan = VlanInventory.objects.filter(
+                #         vlan_name=vlan_name,
+                #         vlan_id=vlan_id,
+                #         devices=device
+                #     ).first()
 
-                    if existing_vlan:
-                        error_messages.append(f"VLAN {vlan_name} already exists for device {device_ip}")
-                    else:
-                        # Save the result in the database
-                        vlan, created = VlanInventory.objects.get_or_create(
-                            vlan_name=vlan_name,
-                            vlan_id=vlan_id
-                        )
-                        vlan.devices.add(device)
-                        success_messages.append(f"VLAN configured successfully on device {device_ip}")
+                #     if existing_vlan:
+                #         error_messages.append(f"VLAN {vlan_name} already exists for device {device_ip}")
+                else:
+                    # Save the result in the database
+                    vlan, created = VlanInventory.objects.get_or_create(
+                        vlan_name = vlan_name,
+                        vlan_id = vlan_id
+                        # selected_devices=device
+                    )
+                    vlan.devices.add(device)
+                    success_messages.append(f"VLAN configured successfully on device {device_ip}")
 
             except Device.DoesNotExist:
                 error_messages.append(f"Device with IP {device_ip} not found.")
@@ -161,9 +161,8 @@ def vlan_manager(request):
         for success_message in success_messages:
             messages.success(request, success_message)
 
-        return redirect('vlan_manager')
-
     return render(request, 'vlan_manager.html', {'devices': devices, 'vlans': vlans})
+
 
 
 def show_command_runner(request):

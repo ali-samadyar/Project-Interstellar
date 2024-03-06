@@ -607,7 +607,7 @@ h2 {
 .vlan-container {
     display: flex;
     /* justify-content: space-between; */
-    /* flex-direction: column; */
+    flex-direction: column;
     margin: 20px;
     padding: 20px;
     align-items: flex-start;
@@ -626,21 +626,29 @@ h2 {
 
 }
 
-.vlan-input-container {
+.vlan-form {
     display: flex;
-    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.vlan-input-container {
+    /* display: flex;
+    flex-wrap: wrap; */
     gap: 20px;
     padding: 15px;
-    margin: 0px 0px 0px 300px;
+    margin-left: 70px;
 
 }
 
 .device-results-container {
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex;
+    flex-wrap: wrap; */
     gap: 20px;
     padding: 15px;
-    margin: 0px 0px 0px 300px;
+    margin: 0px 0px 0px 200px;
+    color: rgb(235, 72, 72);
+    font-style: italic;
+    font-size: 20px;
 }
 
 /* .device-list-form {
