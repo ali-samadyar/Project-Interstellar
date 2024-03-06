@@ -1,32 +1,35 @@
 {% extends 'base.html' %}
 
-{% block title %}Show Command Runner{% endblock %}
+<head>
+    {% load static %}
+    {% block title %}Show Command Runner{% endblock %}
+</head>
 
 {% block content %}
-<div class="vlan-container">
-    <div class="device-list-container">
-        <h2> Choose one or more devices</h2>
-        <form method="post" action="{% url 'show_command_runner' %}" class="device-list-checkbox-form">
-            {% csrf_token %}
+<div class="show-command-container">
+    <form method="post" action="{% url 'show_command_runner' %}" class="show-command-form">
+        {% csrf_token %}
+
+        <div class="device-list-container">
+            <h2> Choose one or more devices</h2>
             {% for device in devices %}
-            {% if device.manufacturer == 'Cisco' or device.manufacturer == 'Fortinet' %}
+            {% if device.manufacturer == 'Cisco' %}
             <label class="device-checkbox">
                 <input type="checkbox" name="selected_devices" value="{{ device.id }}">
                 {{ device.device_name }} ({{ device.ip_address }})
             </label>
             {% endif %}
             {% endfor %}
-        </form>
-    </div>
+        </div>
 
-    <div class="command-input-container">
-        <form method="post" action="{% url 'show_command_runner' %}">
-            {% csrf_token %}
+        <div class="command-input-container">
             <label for="command">Command:</label>
-            <input type="text" id="command" name="command" required style="width: 400px;">
-            <button type="submit">Run Command</button>
-        </form>
-    </div>
+            <input type="text" id="command" name="command" required style="width: 250px;"><br></br>
+            <button type="submit">Run Command</button><br></br>
+            <div class="loading-indicator" id="loading-indicator">
+            </div>
+        </div>
+    </form>
 
     <div class="command-results-container">
         {% if error %}
@@ -56,6 +59,8 @@
         {% endif %}
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/show_select_validation.js' %}"></script>
 {% endblock %}
 
 {% block help %}

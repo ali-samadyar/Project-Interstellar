@@ -171,6 +171,8 @@ def show_command_runner(request):
     if request.method == 'POST':
         selected_device_ids = request.POST.getlist('selected_devices')
         command = request.POST.get('command')
+        print(selected_device_ids)
+        print(command)
 
         if not command.strip().lower().startswith('show'):
             error = "Invalid command. Please enter a command starting with 'SHOW'."
@@ -181,10 +183,10 @@ def show_command_runner(request):
         for device_id in selected_device_ids:
             try:
                 device = Device.objects.get(id=device_id)
-                device = general_cred 
-                device['ip'] = device.ip_address
-                device['device_type'] = 'cisco_ios'               
-                connection = ConnectHandler(**device)
+                device_cred = general_cred 
+                device_cred['ip'] = device.ip_address
+                device_cred['device_type'] = 'cisco_ios'               
+                connection = ConnectHandler(**device_cred)
                 result = connection.send_command(command)
                 connection.disconnect()
                 results[device.ip_address] = result
