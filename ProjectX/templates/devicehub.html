@@ -24,13 +24,13 @@
             {% csrf_token %}
             <div class="form-containerX">
                 <div class="form-column">
-                    <label for="device_name">Device Name/ID:</label>
+                    <label for="device_name">Device Name/ID: <span class="required-mark">*</span></label>
                     <input type="text" id="device_name" name="device_name" required>
-                    <label for="ip_address">IP Address:</label>
+                    <label for="ip_address">IP Address: <span class="required-mark">*</span></label>
                     <input type="text" id="ip_address" name="ip_address"
                         pattern="^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$"
                         title="Please enter a valid IP address" required>
-                    <label for="device_type">Device Type:</label>
+                    <label for="device_type">Device Type: <span class="required-mark">*</span></label>
                     <select id="device_type" name="device_type" required>
                         <option value="" disabled selected>Please select</option>
                         <option value="Router">Router</option>
@@ -45,8 +45,22 @@
                     <input type="text" id="rack_loc" name="rack_loc">
                 </div>
                 <div class="form-column">
-                    <label for="manufacturer">Manufacturer:</label>
-                    <input type="text" id="manufacturer" name="manufacturer">
+                    <label for="manufacturer">Manufacturer: <span class="required-mark">*</span></label>
+                    <select id="manufacturer" name="manufacturer" required>
+                        <option value="" disabled selected>Please select</option>
+                        <option value="Cisco">Cisco</option>
+                        <option value="Fortinet">Fortinet</option>
+                        <option value="Juniper">Juniper</option>
+                        <option value="Palo Alto">Palo Alto</option>
+                        <option value="Arista">Arista</option>
+                        <option value="f5">f5</option>
+                        <option value="Dell">Dell</option>
+                        <option value="HP">HP</option>
+                        <option value="Huawei">Huawei</option>
+                        <option value="Mikrotik">Mikrotik</option>
+                        <option value="Netgear">Netgear</option>
+                        <option value="SonicWall">SonicWall</option>
+                    </select>
                     <label for="model">Model:</label>
                     <input type="text" id="model" name="model">
                     <label for="location">Location:</label>
@@ -58,6 +72,7 @@
         </form>
     </div>
 </div>
+
 
 <table id="devicesTable" class="table">
     <thead>
@@ -107,13 +122,13 @@
             {% csrf_token %}
             <div class="form-containerX">
                 <div class="form-column">
-                    <label for="device_name">Device Name/ID:</label>
+                    <label for="device_name">Device Name/ID: <span class="required-mark">*</span></label>
                     <input type="text" id="edit_device_name" name="device_name" required>
-                    <label for="ip_address">IP Address:</label>
+                    <label for="ip_address">IP Address: <span class="required-mark">*</span></label>
                     <input type="text" id="edit_ip_address" name="ip_address"
                         pattern="^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$"
                         title="Please enter a valid IP address" required>
-                    <label for="device_type">Device Type:</label>
+                    <label for="device_type">Device Type: <span class="required-mark">*</span></label>
                     <select id="edit_device_type" name="device_type" required>
                         <option value="" disabled selected>Please select</option>
                         <option value="Router">Router</option>
@@ -128,8 +143,21 @@
                     <input type="text" id="edit_rack_loc" name="rack_loc">
                 </div>
                 <div class="form-column">
-                    <label for="manufacturer">Manufacturer:</label>
-                    <input type="text" id="edit_manufacturer" name="manufacturer">
+                    <label for="manufacturer">Manufacturer: <span class="required-mark">*</span></label>
+                    <select id="edit_manufacturer" name="manufacturer">"
+                        <option value="Cisco">Cisco</option>
+                        <option value="Fortinet">Fortinet</option>
+                        <option value="Juniper">Juniper</option>
+                        <option value="Palo Alto">Palo Alto</option>
+                        <option value="Arista">Arista</option>
+                        <option value="f5">f5</option>
+                        <option value="Dell">Dell</option>
+                        <option value="HP">HP</option>
+                        <option value="Huawei">Huawei</option>
+                        <option value="Mikrotik">Mikrotik</option>
+                        <option value="Netgear">Netgear</option>
+                        <option value="SonicWall">SonicWall</option>
+                    </select>
                     <label for="model">Model:</label>
                     <input type="text" id="edit_model" name="model">
                     <label for="location">Location:</label>
@@ -137,7 +165,7 @@
                 </div>
             </div>
             <button id="update-device-btn">Update</button>
-            <span onclick="closeAddDeviceModal()" class="close">&times;</span>
+            <span onclick="closeEditDeviceModal()" class="close">&times;</span>
         </form>
     </div>
 </div>
@@ -145,7 +173,6 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="{% static 'js/device_search.js' %}"></script>
 <script src="{% static 'js/device_add.js' %}"></script>
-<script src="{% static 'js/device_search.js' %}"></script>
 <script src="{% static 'js/device_edit.js' %}"></script>
 
 

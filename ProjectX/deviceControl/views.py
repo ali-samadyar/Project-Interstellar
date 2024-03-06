@@ -11,7 +11,7 @@ from urllib.parse import unquote
 
 # Create your views here.
 def device_data(request):
-    devices = Device.objects.all().values_list( 'device_name', 'ip_address', 'manufacturer')
+    devices = Device.objects.all().values_list( 'device_name', 'ip_address', 'manufacturer', 'device_type')
     context = {'devices': devices}
     return render(request, 'interface_mng.html', context)
 
@@ -196,3 +196,31 @@ def show_command_runner(request):
         return render(request, 'show_command_runner.html', {'devices': devices, 'results': results})
 
     return render(request, 'show_command_runner.html', {'devices': devices})
+
+
+def write_memory(request):
+    devices = Device.objects.all()
+    
+    if request.method == 'POST':
+        selected_device = request.POST.getlist('selected_devices')
+        error_messages = []
+        success_messages = []
+        for device_ip in selected_device:
+            try:
+                device = Device.objects.get(ip_address=device_ip)
+                device = general_cred 
+                device['ip'] = device_ip
+                device['device_type'] = 'cisco_ios'
+                connection = ConnectHandler(**device)
+                output = connection.send_command('write memory')
+                connection.disconnect()
+                success_messages.append(f"Write memory successful on device {device_ip}")
+            except Exception as e:
+                error_messages.append(f"Error writing memory on device {device_ip}: {str(e)}")
+        for error_message in error_messages:
+            messages.error(request, error_message)
+        for success_message in success_messages:
+            messages.success(request, success_message)
+        return redirect('write_memory')
+    
+    return render(request, 'write_job.html', {'devices': devices}) 

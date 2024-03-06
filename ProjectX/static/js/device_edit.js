@@ -31,3 +31,8 @@ function editDevice(id) {
         xhr.send(new URLSearchParams(new FormData(document.getElementById("edit-device-form"))));
     };
 }
+
+
+function closeEditDeviceModal() {
+    document.getElementById('editDeviceModal').style.display = 'none';
+}

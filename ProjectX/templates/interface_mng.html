@@ -20,7 +20,6 @@
             <tbody>
                 {% for device in devices %}
                 {% if device.2 == 'Cisco' or device.2 == 'Fortinet' %}
-
                 <tr>
                     <td><a href="#" class="device-name" data-device-name="{{device.0}}" data-device-ip="{{ device.1 }}"
                             data-device-manufacturer="{{ device.2}}">{{ device.0 }}</a></td>
@@ -35,8 +34,6 @@
                 {% endfor %}
             </tbody>
         </table>
-
-
     </div>
 
     <div class="inter_list_class">

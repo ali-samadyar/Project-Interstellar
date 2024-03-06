@@ -443,7 +443,12 @@ td {
     gap: 5px;
 }
 
+.required-mark {
+    color: red;
+    font-size: 20px;
+    margin-left: 5px;
 
+}
 
 
 
@@ -601,46 +606,63 @@ h2 {
 
 .vlan-container {
     display: flex;
-    flex-direction: column;
+    /* justify-content: space-between; */
+    /* flex-direction: column; */
     margin: 20px;
+    padding: 20px;
+    align-items: flex-start;
 }
 
 .device-list-container {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     /* gap: 10px; */
-    padding: 7px;
+    padding: 20px;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0px 40px 20px rgba(0, 0, 0, 0.20);
-}
+    width: 500px;
 
-.device-list-container form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 50px;
-    /* padding: 5px; */
-    margin-bottom: 20px;
-
-}
-
-.device-checkbox {
-    display: flex;
-    align-items: center;
-    /* margin-top: 5px; */
-}
-
-.device-checkbox input {
-    margin-right: 5px;
 }
 
 .vlan-input-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 5px;
-    margin-top: 40px;
+    padding: 15px;
+    margin: 0px 0px 0px 300px;
+
 }
+
+.device-results-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 15px;
+    margin: 0px 0px 0px 300px;
+}
+
+/* .device-list-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    padding: 5px;
+    margin: 20px;
+} */
+
+.device-list-checkbox-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.device-checkbox {
+    display: block;
+    margin: 15px;
+}
+
+
 
 /* command-runner css */
 
@@ -648,8 +670,16 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 5px;
-    margin-top: 40px;
+    padding: 15px;
+    margin: 0px 0px 0px 300px;
+}
+
+.command-results-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 15px;
+    margin: 0px 0px 0px 300px;
 }
 
 .command-input-container input:focus {
@@ -660,4 +690,31 @@ h2 {
     font-size: 14px;
     height: 80px;
 
+}
+
+
+/* write job css */
+
+
+.write-action-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.write-action-section button {
+    cursor: pointer;
+    width: 240px;
+    height: 90px;
+    font-size: 30px;
+    margin-top: 200px;
+    margin-bottom: 50px;
+}
+
+.write-action-results-container {
+    color: red;
+    margin-top: 50px;
 }

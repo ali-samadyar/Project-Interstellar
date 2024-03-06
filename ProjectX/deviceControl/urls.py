@@ -12,5 +12,6 @@ urlpatterns = [
     path('interface-mng/device/<str:device_ip>/interface/<path:encoded_interface_name>/<str:action>/', views.device_interface_action, name='device_interface_action'),
     path('vlan', views.vlan_manager, name='vlan_manager'),
     path('command-runner/', views.show_command_runner, name='show_command_runner'),
+    path('write-job/', views.write_memory, name='write_memory'),
     
 ]

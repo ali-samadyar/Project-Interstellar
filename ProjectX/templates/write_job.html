@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="vlan-container">
+    <div class="device-list-container">
+        <h2>Choose one or more devices</h2>
+        <form method="post" action="{% url 'write_memory' %}" class="device-list-checkbox-form">
+            {% csrf_token %}
+            {% for device in devices %}
+            {% if device.manufacturer == 'Cisco' %}
+            <label class="device-checkbox">
+                <input type="checkbox" name="selected_devices" value="{{ device.id }}">
+                {{ device.device_name }} ({{ device.ip_address }})
+            </label>
+            {% endif %}
+            {% endfor %}
+
+        </form>
+    </div>
+    <div class="write-action-section">
+        <div class="write-action-section-info">
+            <!-- Add your creative and fun content here -->
+            <h2>Let the Magic Happen! ✨</h2>
+            <p>Witness the power of technology as we secure your configurations!</p>
+            <!-- Add more creative elements as needed -->
+        </div>
+
+        <button type="submit">Write Memory</button> <br></br>
+        <div class="loading-indicator" id="loading-indicator">
+        </div>
+        <div class="write-action-results-container">
+            <p>TEST</p>
+            {% if error %}
+            <p class="error-message">{{ error }}</p>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

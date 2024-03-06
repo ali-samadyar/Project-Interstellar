@@ -6,13 +6,15 @@
 <div class="vlan-container">
     <div class="device-list-container">
         <h2> Choose one or more devices</h2>
-        <form method="post" action="{% url 'show_command_runner' %}" class="device-list-form">
+        <form method="post" action="{% url 'show_command_runner' %}" class="device-list-checkbox-form">
             {% csrf_token %}
             {% for device in devices %}
+            {% if device.manufacturer == 'Cisco' or device.manufacturer == 'Fortinet' %}
             <label class="device-checkbox">
                 <input type="checkbox" name="selected_devices" value="{{ device.id }}">
                 {{ device.device_name }} ({{ device.ip_address }})
             </label>
+            {% endif %}
             {% endfor %}
         </form>
     </div>
@@ -55,3 +57,10 @@
     </div>
 </div>
 {% endblock %}
+
+{% block help %}
+<h2>Show Command Runner 🚀</h2>
+<p>🔍 Explore and interact with Cisco devices using the Show Command Runner. 🌐</p>
+<p>Enter the desired show commands and select one or more devices. Click "Run Commands" to see the magic happen! ✨</p>
+{% endblock %}
+```
