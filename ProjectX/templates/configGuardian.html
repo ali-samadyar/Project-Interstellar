@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+<head>
+    {% load static %}
+    {% block title %}Config Guardian {% endblock %}
+</head>
+
+
+{% block content %}
+<div class="config-guardian-container">
+    <div class="config-guardian-header">
+
+        <h2>{{ device.device_name }} ({{ device.ip_address }})</h2>
+        <div class="loading-indicator" id="loading-indicator">
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="backup-button">Backup Config</button>
+        </form>
+    </div>
+    <div class="config-guardian-table">
+        <div class="config-view">
+            <h3>View Configuration - <span style="color: brown;">Selected Backup ID: {{selected_backup_id}}</span></h3>
+            <textarea readonly>{{ selected_backup.config_data }}</textarea>
+        </div>
+        <div class="config-history">
+            <h3>Configuration Backups</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Timestamp</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for backup in backups %}
+                    <tr>
+                        <td>{{backup.id}}</td>
+                        <td>{{ backup.timestamp }}</td>
+
+                        <td><a href="{% url 'config_guardian' device_ip=device.ip_address %}?backup_id={{ backup.id }}">View
+                                the Config</a>
+                            <a href="{% url 'remove_backup' device_ip=device.ip_address backup_id=backup.id %}"
+                                class="remove-link"
+                                onclick="return confirm('Are you sure you want to remove this backup?')">Remove</a>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/config_guardian.js' %}"></script>
+
+{% endblock %}
+
+{% block help %}
+<div class="help-section">
+    <h2>Welcome to the Config Guardian! 🛡️</h2>
+    <p>Congratulations, tech hero! You've stepped into the Config Guardian's realm, where configurations are saved, and
+        devices are protected. Here's your guide to mastering the arcane arts of configuration backup:</p>
+
+
+    <h3>📁 Configuration History</h3>
+    <p>Behold the mystical Configuration Backups table! Each entry is a timestamped snapshot of your device's essence.
+        Click on the ID to traverse through time and inspect the configurations of days gone by.</p>
+
+    <h3>👁️‍🗨️ View Configuration</h3>
+    <p>Dive into the sacred realm of configurations! Click on a backup's ID to reveal its secrets. The View
+        Configuration section unveils the arcane symbols and commands that make your devices tick.</p>
+
+    <h3>⚔️ Remove Configurations</h3>
+    <p>Too many backups cluttering your device's history? Fear not! You can bravely remove a backup by clicking "Remove
+        Config" and confirming your decision. The Config Guardian will ensure it's done with the utmost precision.</p>
+
+
+    <h3>🌟 Pro Tips</h3>
+    <ul>
+        <li>Use the "Backup Config" button regularly to keep your devices battle-ready.</li>
+        <li>Explore different timestamps in the Configuration Backups table to compare device states.</li>
+        <li>If a configuration becomes obsolete, fear not – the "Remove Config" button is your ally!</li>
+    </ul>
+
+    <p>May your configurations be secure, and your devices forever connected! 🚀</p>
+</div>
+{% endblock %}

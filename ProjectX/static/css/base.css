@@ -749,3 +749,51 @@ h2 {
     margin-top: 50px;
     margin-left: 200px;
 }
+
+
+
+/* backup css */
+.config-guardian-container {
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.config-guardian-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.config-guardian-header button {
+    margin-right: 50px;
+    width: 180px;
+    height: 50px;
+
+}
+
+.config-guardian-table {
+    display: flex;
+    justify-content: space-between;
+}
+
+.config-guardian-table table {
+    margin-top: 28px;
+}
+
+.config-view textarea {
+    width: 200%;
+    height: 300%;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    resize: none;
+    font-size: 14px;
+}
+
+.selected {
+    background-color: #f13939;
+}

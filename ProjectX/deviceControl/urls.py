@@ -1,6 +1,7 @@
-from django.urls import path
+from django.urls import path, include
 from django.views.generic.base import RedirectView
 from . import views
+from configGuardian.views import config_guardian
 
 # app_name = 'sslmonitor'
 
@@ -13,5 +14,6 @@ urlpatterns = [
     path('vlan', views.vlan_manager, name='vlan_manager'),
     path('command-runner/', views.show_command_runner, name='show_command_runner'),
     path('write-job/', views.write_memory, name='write_memory'),
+    path('config-guardian/<str:device_ip>/', include('configGuardian.urls')),
     
 ]

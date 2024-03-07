@@ -12,7 +12,7 @@ class LookupHistory(models.Model):
     mx_record = models.JSONField(blank=True, null=True)
     ns_record = models.JSONField(blank=True, null=True)
     soa_record = models.JSONField(blank=True, null=True)
-    # last_update = models.DateTimeField(auto_now=True)
+    
 
     def __str__(self):
         return self.hostname

@@ -14,7 +14,7 @@
         <div class="device-list-container">
             <h2> Choose one or more devices</h2><br></br>
             {% for device in devices %}
-            {% if device.device_type == 'Switch' %}
+            {% if device.device_type == 'Switch' and device.manufacturer == 'Cisco' %}
             <label class="device-checkbox">
                 <input type="checkbox" name="selected_devices" value="{{ device.ip_address }}">
                 {{ device.device_name }} ({{ device.ip_address }})

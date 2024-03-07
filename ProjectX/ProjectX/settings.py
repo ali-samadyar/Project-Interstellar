@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'deviceHub',
     'deviceControl',
     'lookups',
+    'configGuardian',
 
     #django apps
     'django.contrib.admin',
