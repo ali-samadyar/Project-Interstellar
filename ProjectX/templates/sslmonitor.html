@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
+
 <head>
     {% load static %}
     {% block title %}SSL Monitoring{% endblock %}
+
 </head>
 
 
@@ -21,11 +23,7 @@
         </form>
 
     </div>
-    <form action="{% url 'update_ssl_certificates' %}" method="post" class="update_form">
-        {% csrf_token %}
-        <button type="submit" name="update_ssl_db" onclick="alert('Table Updated!')" class="update_button">Update
-            Table</button>
-    </form>
+
     <div class="result-text">
         <p>Domain:</p>
         <p>Remaining Days:</p>
@@ -53,7 +51,9 @@
         <tr>
             <td>{{ ssl_certificate.domain }}</td>
             <td>{{ ssl_certificate.expiration_date }}</td>
-            <td>{{ ssl_certificate.remaining_days }}</td>
+            <td class="{% if ssl_certificate.remaining_days < 60 %}expired{% endif %}">
+                {{ ssl_certificate.remaining_days }}
+            </td>
             <td>
                 <form method="post" action="{% url 'remove_ssl_certificate' %}">
                     {% csrf_token %}
@@ -80,8 +80,8 @@
         witness the SSL secrets unfold!</p>
     <p>🔍 Results Snapshot: Catch the key details - domain, days left,
         and the expiration date - in a quick glance.</p>
-    <p>🔄 Update Table: Keep your SSL table fresh with the "Update Table"
-        button. Click it, and voila! Your table is up-to-date.</p>
+    <p>🔄 Auto-Update Magic: Your SSL table automatically gets updated every time you open the page. No need to lift a
+        finger!</p>
     <p>😨 Table Adventures: Spot a rogue entry? Nix it with the "Remove"
         button in the table.</p>
     <p>🤔 Stuck? Dive into FAQs or give us a shout. SSL success awaits!</p>

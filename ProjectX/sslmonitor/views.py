@@ -3,6 +3,7 @@ from .sslchecker import get_ssl_certificate_info
 from django.shortcuts import redirect, render
 from .models import SSLCertificate
 from django.utils import timezone
+from django.contrib import messages
 # Create your views here.
 
 
@@ -31,21 +32,22 @@ def sslchecker_function(request):
                 # Display error message in 'result_output'
                 context = {'error_message': 'Invalid URL'}
                 
-        elif 'update_ssl_db' in request.POST:
-            # Code for Update SSL Certificates button
-            ssl_certificates = SSLCertificate.objects.all()
+    else:
+        # Code for Update SSL Certificates button
+        ssl_certificates = SSLCertificate.objects.all()
 
-            for ssl_certificate in ssl_certificates:
-                url_input = ssl_certificate.domain
-                _, expiration_date, remaining_days = get_ssl_certificate_info(url_input)
+        for ssl_certificate in ssl_certificates:
+            url_input = ssl_certificate.domain
+            _, expiration_date, remaining_days = get_ssl_certificate_info(url_input)
 
-                # Remove timezone information from expiration date
-                expiration_date = expiration_date[:19]
-                # Update SSL certificate information in the database
-                ssl_certificate.expiration_date = timezone.datetime.strptime(expiration_date, "%Y-%m-%d %H:%M:%S")
-                ssl_certificate.remaining_days = remaining_days
-                ssl_certificate.save()
+            # Remove timezone information from expiration date
+            expiration_date = expiration_date[:19]
+            # Update SSL certificate information in the database
+            ssl_certificate.expiration_date = timezone.datetime.strptime(expiration_date, "%Y-%m-%d %H:%M:%S")
+            ssl_certificate.remaining_days = remaining_days
+            ssl_certificate.save()
             
+
 
     # Fetch data from the database for table display
     ssl_certificates = SSLCertificate.objects.all()

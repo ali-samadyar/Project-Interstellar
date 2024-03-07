@@ -794,6 +794,6 @@ h2 {
     font-size: 14px;
 }
 
-.selected {
-    background-color: #f13939;
+.expired {
+    background-color: #f04a4a;
 }
