@@ -18,7 +18,7 @@ def add_device(request):
             form.save()
             return redirect('devicehub')
     else:
-        form = DeviceForm()
+        form = DeviceForm() # an empty form
 
     return render(request, 'add_device.html', {'form': form})
 

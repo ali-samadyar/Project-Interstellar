@@ -11,12 +11,14 @@ from urllib.parse import unquote
 
 # Create your views here.
 def device_data(request):
+    # create a tuple of device data (not all fields)
     devices = Device.objects.all().values_list( 'device_name', 'ip_address', 'manufacturer', 'device_type')
+    #create a dictionary of device data (key: devices / value: device data (Django QuerySet object))
     context = {'devices': devices}
     return render(request, 'interface_mng.html', context)
 
-
 def get_interface_info(request, device_ip):
+    # look for the device with the given IP address
     device = Device.objects.get(ip_address=device_ip)
     manufacturer = device.manufacturer
     device_cred = general_cred
@@ -43,14 +45,17 @@ def get_interface_info(request, device_ip):
         output = connection.send_command(command)
         connection.disconnect()
         interfaces = {}
-        interfaces = output.split('== [ ')[1:]
-        parsed_interfaces = [
-            {'name': name.split('   ')[0], 'ip': 'N/A', 'status': 'N/A'}
-            for name in (section.split('name: ')[1].split('\n')[0] for section in interfaces)
+        interfaces = output.split('== [ ')[1:] # split the output into sections (disacard anything before ==)
+
+
+        # this part just extract NAME of the interfaces
+        parsed_interfaces = [ 
+            {'name': name.split('   ')[0], 'ip': 'N/A', 'status': 'N/A'} # create a dictionary for each interafce
+            for name in (section.split('name: ')[1].split('\n')[0] for section in interfaces) 
         ]
-        for idx, section in enumerate(interfaces):
+        for idx, section in enumerate(interfaces): 
             if ' ip: ' in section:
-                name = section.split('name: ')[1].split('   ')[0]
+                name = section.split('name: ')[1].split('   ')[0] #delimiter would be removed form the list (which is 'name: ')
                 ip = section.split(' ip: ')[1].split('   ')[0]
                 status = section.split(' status: ')[1].split('   ')[0]
                 parsed_interfaces[idx]['name'] = name
@@ -132,16 +137,7 @@ def vlan_manager(request):
                 error_detected = any("Error" in line for line in output_lines)
                 if error_detected:
                     error_messages.append(f"Failed to configure VLAN on device {device_ip}: {output}")
-                # else:
-                #     # Check if the VLAN already exists for this device
-                #     existing_vlan = VlanInventory.objects.filter(
-                #         vlan_name=vlan_name,
-                #         vlan_id=vlan_id,
-                #         devices=device
-                #     ).first()
 
-                #     if existing_vlan:
-                #         error_messages.append(f"VLAN {vlan_name} already exists for device {device_ip}")
                 else:
                     # Save the result in the database
                     vlan, created = VlanInventory.objects.get_or_create(
@@ -169,8 +165,6 @@ def show_command_runner(request):
     if request.method == 'POST':
         selected_device_ids = request.POST.getlist('selected_devices')
         command = request.POST.get('command')
-        print(selected_device_ids)
-        print(command)
 
         if not command.strip().lower().startswith('show'):
             error = "Invalid command. Please enter a command starting with 'SHOW'."
@@ -181,7 +175,7 @@ def show_command_runner(request):
         for device_id in selected_device_ids:
             try:
                 device = Device.objects.get(id=device_id)
-                device_cred = general_cred.copy()  # Use a copy to avoid modifying the original dict
+                device_cred = general_cred
                 device_cred['ip'] = device.ip_address
                 device_cred['device_type'] = 'cisco_ios'               
                 connection = ConnectHandler(**device_cred)
@@ -194,7 +188,6 @@ def show_command_runner(request):
         return render(request, 'show_command_runner.html', {'devices': devices, 'results': results, 'command': command})
 
     return render(request, 'show_command_runner.html', {'devices': devices})
-
 
 def write_memory(request):
     devices = Device.objects.all()
