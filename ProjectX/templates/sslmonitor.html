@@ -51,7 +51,7 @@
         <tr>
             <td>{{ ssl_certificate.domain }}</td>
             <td>{{ ssl_certificate.expiration_date }}</td>
-            <td class="{% if ssl_certificate.remaining_days < 60 %}expired{% endif %}">
+            <td class="{% if ssl_certificate.remaining_days < 61 %}expired{% endif %}">
                 {{ ssl_certificate.remaining_days }}
             </td>
             <td>

@@ -3,6 +3,7 @@
 <head>
     {% load static %}
     {% block title %}BGP Monitoring {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -17,6 +18,9 @@
             <input type="text" id="asn_input" name="asn_input" required="required" placeholder="Enter ASN" />
             <button type="submit" name="bgp_checker">BGP Checker</button>
         </form>
+        <div class="bgp-search-box" id="bgp-search-box">
+            <input type="text" id="search-box" placeholder="Search..." />
+        </div>
     </div>
 </div>
 
@@ -33,7 +37,7 @@
             <th>Country</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="bgp-table-body">
         {% for result in saved_results %}
         <tr>
             <td>{{ result.as_number }}</td>
@@ -59,4 +63,6 @@
         AS name, description, and country code.</p>
     <p>🤔Stuck? Dive into FAQs or give us a shout. BGP success awaits!</p>
 </div>
+
+<script src="{% static 'js/bgp_live_search.js' %}"></script>
 {% endblock %}
