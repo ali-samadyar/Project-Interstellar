@@ -25,4 +25,5 @@ urlpatterns = [
     path('devicehub/', include('deviceHub.urls')),
     path('devicecontrol/', include('deviceControl.urls')),
     path('lookups/', include('lookups.urls')),
+    path('controltower/', include('controlTower.urls')),
 ]

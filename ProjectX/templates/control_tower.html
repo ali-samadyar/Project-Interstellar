@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+<head>
+    {% load static %}
+    {% block title %}Control Tower {% endblock %}
+</head>
+
+{% block content %}
+
+<div class="management-container">
+    <div class="mgmt_navbar">
+        <h2>Menu</h2>
+        <img src="{% static 'images/CT_general_icon.png' %}" class="mgmt_navbar_icons">
+        <a href="#" data-section="general">General Setting</a><br></br>
+        <img src="{% static 'images/CT_apprearance_icon.png' %}" class="mgmt_navbar_icons">
+        <a href="#" data-section="appearance">Appearance</a><br></br>
+        <img src="{% static 'images/CT_smtp_icon.png' %}" class="mgmt_navbar_icons">
+        <a href="#" data-section="smtp">SMTP Configuration</a><br></br>
+        <img src="{% static 'images/CT_api_icon.png' %}" class="mgmt_navbar_icons">
+        <a href="#" data-section="api">API Configuration</a><br></br>
+        <img src="{% static 'images/CT_notif_icon.png' %}" class="mgmt_navbar_icons">
+        <a href="#" data-section="notifications">Notifications</a><br></br>
+        <img src="{% static 'images/CT_user_icon.png' %}" class="mgmt_navbar_icons">
+        <a href="#" data-section="user">User Management</a><br></br>
+    </div>
+
+    <div class="mgmt_control_section" id="general">
+        <h2>General Setting</h2>
+        This section is under construction!
+    </div>
+
+    <div class="mgmt_control_section" id="appearance" style="display: none;">
+        <h2>Appearance</h2>
+        This section is under construction!
+    </div>
+
+    <div class="mgmt_control_section" id="smtp" style="display: none;">
+        <form id="smtp-form">
+            <h2>SMTP Configuration</h2>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="smtp_name" required><br><br>
+
+            <label for="sender">Email Sender:</label>
+            <input type="text" id="sender" name="smtp_sender" required><br><br>
+
+            <label for="password">Email Password:</label>
+            <input type="password" id="password" name="smtp_password" required><br><br>
+
+            <label for="server">Email Server:</label>
+            <input type="text" id="server" name="smtp_server" required><br><br>
+
+            <label for="port">Email Server Port:</label>
+            <input type="text" id="port" name="smtp_server_port" required value="465"><br><br>
+
+            <button type="submit">Save</button>
+        </form>
+        <div class="mgmt_control_section_table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email Sender</th>
+                        <th>Email Server</th>
+                        <th>Email Server Port</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for smtp_config in smtp_db_data %}
+                    <tr>
+                        <td>{{ smtp_config.smtp_name }}</td>
+                        <td>{{ smtp_config.smtp_sender }}</td>
+                        <td>{{ smtp_config.smtp_server }}</td>
+                        <td>{{ smtp_config.smtp_server_port }}</td>
+                        <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mgmt_control_section" id="api" style="display: none;">
+        <h2>API Configuration</h2>
+        This section is under construction!
+    </div>
+
+    <div class="mgmt_control_section" id="notifications" style="display: none;">
+        <h2>Notifications</h2>
+        This section is under construction!
+    </div>
+
+    <div class="mgmt_control_section" id="user" style="display: none;">
+        <h2>User Management</h2>
+        This section is under construction!
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/controlTower.js' %}"></script>
+<script src="{% static 'js/controlTower_smtp.js' %}"></script>
+
+{% endblock %}

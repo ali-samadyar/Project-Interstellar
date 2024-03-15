@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'deviceControl',
     'lookups',
     'configGuardian',
+    'controlTower',
 
     #django apps
     'django.contrib.admin',

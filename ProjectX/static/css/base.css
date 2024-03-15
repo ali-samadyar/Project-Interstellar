@@ -809,3 +809,78 @@ h2 {
 .expired {
     background-color: #f04a4a;
 }
+
+
+
+
+
+
+/* Control tower css */
+.management-container {
+    display: flex;
+    margin: 20px;
+}
+
+.mgmt_navbar {
+    background: rgba(255, 255, 255, 0.52);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.6px);
+    -webkit-backdrop-filter: blur(6.6px);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    flex: 0.6;
+    padding: 20px;
+}
+
+.mgmt_navbar h2 {
+
+    margin-bottom: 50px;
+}
+
+.mgmt_navbar a {
+    color: #000;
+    text-decoration: none;
+    margin: 10px;
+    padding: 10px;
+
+}
+
+.mgmt_navbar a:hover {
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.6px);
+    -webkit-backdrop-filter: blur(6.6px);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    font-style: italic;
+}
+
+.mgmt_navbar_icons {
+    height: 23px;
+    vertical-align: text-bottom;
+    margin-left: 15px;
+
+}
+
+.mgmt_control_section {
+    flex: 2;
+    padding: 10px;
+    margin-left: 70px;
+    margin-right: 50px;
+    border: 2px solid #000;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.mgmt_control_section form {
+    margin-left: 20px;
+}
+
+.mgmt_control_section_table {
+    margin-right: 30px;
+    margin-top: 70px;
+}
+
+#smtp {
+    display: flex;
+    justify-content: space-between;
+}
