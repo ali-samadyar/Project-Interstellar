@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interstellar | {% block title %} {% endblock %}</title>
     <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
-    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+    <link rel="stylesheet" href="{% static 'css/error_pages.css'%}">
 
 </head>
 
@@ -50,21 +50,12 @@
         </ul>
     </nav>
 
-    <main class="content-area">
-        <section class="content-section">
-            {% block content %}
-            {% endblock %}
-        </section>
-
-        <aside class="help-section">
-            {% block help %}
-            {% endblock %}
-        </aside>
-
-    </main>
+    <div class="error-container">
+        <h1>Oooops! 404</h1>
+        <p>Sorry, the page you are looking for does not exist.</p>
+        <a href="http://127.0.0.1:8000/">Go back to Home</a>
+    </div>
     <footer class="footer">
         <p>&copy; 2024 Interstellar, ProjectX</p>
     </footer>
 </body>
-
-</html>
