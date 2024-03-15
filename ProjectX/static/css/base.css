@@ -58,6 +58,13 @@ body {
     background-color: #262626;
 }
 
+.navbar_icons {
+    height: 25px;
+    /* margin-top: 3px; */
+}
+
+
+
 .dropdown {
     position: relative;
 }
@@ -86,7 +93,7 @@ body {
 }
 
 .navbar {
-    background-image: linear-gradient(to right, #797878 25%, #443d3d 100%);
+    background-image: linear-gradient(to right, #443d3d 25%, #797878 100%);
 }
 
 
