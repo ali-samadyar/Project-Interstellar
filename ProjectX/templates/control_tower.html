@@ -58,6 +58,7 @@
             <table>
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Email Sender</th>
                         <th>Email Server</th>
@@ -68,11 +69,21 @@
                 <tbody>
                     {% for smtp_config in smtp_db_data %}
                     <tr>
+                        <td>{{ smtp_config.id }}</td>
                         <td>{{ smtp_config.smtp_name }}</td>
                         <td>{{ smtp_config.smtp_sender }}</td>
                         <td>{{ smtp_config.smtp_server }}</td>
                         <td>{{ smtp_config.smtp_server_port }}</td>
-                        <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+                        <td>
+                            <form method="post" action="{% url 'delete_smtp_configuration' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="{{ smtp_config.id }}" />
+                                <button type="submit" class="remove-button"
+                                    onclick="return confirm('Are you sure you want to remove this SMTP configuration?')">
+                                    Remove
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

@@ -301,7 +301,8 @@ td {
 }
 
 
-.remove-button {
+.remove-button,
+.delete-smtp-configuration-btn {
     background-color: #001524;
     color: white;
     border: none;
@@ -313,7 +314,8 @@ td {
     cursor: pointer;
 }
 
-.remove-button:hover {
+.remove-button:hover,
+.delete-smtp-configuration-btn:hover {
     background-color: red;
 }
 
