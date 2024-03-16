@@ -4,6 +4,8 @@ from django.shortcuts import redirect, render
 from .models import SSLCertificate
 from django.utils import timezone
 from django.contrib import messages
+import pytz
+from datetime import datetime
 # Create your views here.
 
 
@@ -38,16 +40,11 @@ def sslchecker_function(request):
 
         for ssl_certificate in ssl_certificates:
             url_input = ssl_certificate.domain
-            _, expiration_date, remaining_days = get_ssl_certificate_info(url_input)
-
-            # Remove timezone information from expiration date
-            expiration_date = expiration_date[:19]
-            # Update SSL certificate information in the database
-            ssl_certificate.expiration_date = timezone.datetime.strptime(expiration_date, "%Y-%m-%d %H:%M:%S")
-            ssl_certificate.remaining_days = remaining_days
-            ssl_certificate.save()
-            
-
+            processed_remaining_days = get_ssl_certificate_info(url_input)
+            if processed_remaining_days is not None:
+                ssl_certificate.expiration_date = processed_remaining_days[1]
+                ssl_certificate.remaining_days = processed_remaining_days[2]
+                ssl_certificate.save()
 
     # Fetch data from the database for table display
     ssl_certificates = SSLCertificate.objects.all()
