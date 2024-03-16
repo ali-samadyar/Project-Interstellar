@@ -28,6 +28,4 @@ urlpatterns = [
     path('controltower/', include('controlTower.urls')),
 ]
 
-handler404 = 'ProjectX.views.custom_404'
-handler500 = 'ProjectX.views.custom_500'
 
