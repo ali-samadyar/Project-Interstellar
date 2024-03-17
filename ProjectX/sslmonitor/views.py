@@ -125,3 +125,40 @@ def test_email(request):
         return JsonResponse({'message': 'Test email sent successfully'})
     else:
         return JsonResponse({'message': 'No email sent'})
+
+
+
+
+
+
+
+
+# auto email function with celery / NOT FUNCTIONAL - NEEDS TO BE REFACTORED
+# @shared_task
+# def monitor_ssl_certificates():
+#     domains = SSLCertificate.objects.all()
+#     email_sent = False  # Flag to track if any email was sent
+#     for domain in domains:
+#         remaining_days = domain.remaining_days
+#         if remaining_days in [35, 40, 56]:  # Adjusted days for testing purposes
+#             email_config = EmailConfig.objects.first()  # Assuming there's only one email configuration
+#             smtp_config = SMTPConfiguration.objects.get(smtp_name=email_config.smtp_name)
+#             try:
+#                 # Send email
+#                 em = EmailMessage()
+#                 em.set_content(f'SSL certificate of {domain.domain} will expire in {remaining_days} days. Please renew it.')
+#                 em['Subject'] = f'{domain.domain} SSL Certificate Expiry Alert - {remaining_days} days remaining'
+#                 em['From'] = smtp_config.smtp_sender
+#                 em['To'] = email_config.receiver
+#                 context = ssl.create_default_context()
+#                 with smtplib.SMTP_SSL(smtp_config.smtp_server, smtp_config.smtp_server_port, context=context) as server:
+#                     server.login(smtp_config.smtp_sender, smtp_config.smtp_password)
+#                     server.send_message(em)
+#                     email_sent = True  # Set flag to True if email was sent
+#             except Exception as e:
+#                 return {'success': False, 'errors': str(e)}
+    
+#     if email_sent:
+#         return {'message': 'Test email sent successfully'}
+#     else:
+#         return {'message': 'No email sent'}
