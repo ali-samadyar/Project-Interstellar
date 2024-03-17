@@ -20,7 +20,26 @@
             <input type="text" id="url_Input" name="url_Input" required="required" placeholder="Enter the Domain" />
             <button type="submit" name="ssl_checker">SSL Checker</button>
         </form>
+        <button onclick="openEmailConfigModal()">Configure Email</button>
+        <button id="testButton">Test Email</button>
 
+        <div id="emailConfigModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeEmailConfigModal()">&times;</span>
+                <h2>Email Configuration</h2>
+                <form id="emailConfigForm">
+                    <label for="smtp_name">SMTP Server:</label>
+                    <select id="smtp_name" name="smtp_name">
+                        {% for email_config in email_configs %}
+                        <option value="{{ email_config.smtp_name }}">{{ email_config.smtp_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="receiver">Email Receiver(s):</label>
+                    <input type="text" id="receiver" name="receiver">
+                    <button type="button" onclick="saveEmailConfig()">Save</button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <div class="result-text">
@@ -67,6 +86,9 @@
         {% endfor %}
     </tbody>
 </table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/ssl_monitor.js' %}"></script>
 
 {% endblock %}
 

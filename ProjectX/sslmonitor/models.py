@@ -9,3 +9,11 @@ class SSLCertificate(models.Model):
 
     def __str__(self):
         return self.domain
+    
+
+class EmailConfig(models.Model):
+    smtp_name = models.CharField(max_length=100)
+    receiver = models.EmailField()
+
+    def __str__(self):
+        return f"{self.smtp_name} - {self.receiver}"
