@@ -104,7 +104,7 @@ def test_email(request):
     for domain in domains:
         remaining_days = domain.remaining_days
         if remaining_days in [35, 40, 56]:
-            email_config = EmailConfig.objects.first()  # Assuming there's only one email configuration
+            email_config = EmailConfig.objects.first()  # for when there is only one email configuration
             smtp_config = SMTPConfiguration.objects.get(smtp_name=email_config.smtp_name)
             try:
                 # Send email
