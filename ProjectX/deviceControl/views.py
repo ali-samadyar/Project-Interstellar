@@ -9,7 +9,7 @@ import os
 from django.contrib import messages
 from urllib.parse import unquote
 
-# Create your views here.
+
 def device_data(request):
     # create a tuple of device data (not all fields)
     devices = Device.objects.all().values_list( 'device_name', 'ip_address', 'manufacturer', 'device_type')

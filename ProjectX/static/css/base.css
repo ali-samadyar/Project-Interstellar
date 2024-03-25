@@ -887,3 +887,13 @@ h2 {
     display: flex;
     justify-content: space-between;
 }
+
+
+
+/* ERROR CSS */
+
+.error_msg {
+    color: red;
+    font-size: 20px;
+    margin-left: 20px;
+}

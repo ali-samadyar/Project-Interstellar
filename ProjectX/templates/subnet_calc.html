@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+<head>
+    {% load static %}
+    {% block title %}Subnet Calculator {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+{% block content %}
+<div class="container">
+    <!-- <h1>Subnet Calculator</h1> -->
+    <form class="form-container" action="{% url 'subnet_calculator_function' %}" method="post">
+        <div class="form-group">
+            <label for="ip_address">IP Address</label>
+            <input type="text" id="subnet" name="subnet" placeholder="Enter IP Address" required>
+        </div>
+        <div class="form-group">
+            <label for="subnet_mask">Subnet Bits</label>
+            <input type="text" id="mask" name="mask" placeholder="Enter Subnet Bits" required>
+        </div>
+        <button type="submit">Calculate</button>
+    </form>
+</div>
+<div id="subnet_results">
+    {% if data %}
+    <table>
+        <tr>
+            <th>CIDR Notation</th>
+            <th>Subnet Bits</th>
+            <th>Subnet Mask</th>
+            <th>Wildcard Mask</th>
+            <th>Network Address</th>
+            <th>Broadcast Address</th>
+            <th>Assignable Hosts</th>
+            <th>First Assignable Host</th>
+            <th>Last Assignable Host</th>
+        </tr>
+        <tr>
+            <td>{{ data.cidr_notation }}</td>
+            <td>{{ data.subnet_bits }}</td>
+            <td>{{ data.subnet_mask }}</td>
+            <td>{{ data.wildcard_mask }}</td>
+            <td>{{ data.network_address }}</td>
+            <td>{{ data.broadcast_address }}</td>
+            <td>{{ data.assignable_hosts }}</td>
+            <td>{{ data.first_assignable_host }}</td>
+            <td>{{ data.last_assignable_host }}</td>
+        </tr>
+    </table>
+    {% else %}
+    <p class="error_msg">{{ error }}</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block help %}
+<h2>IP Subnet Calculator Help</h2>
+<p>Welcome to the IP Subnet Calculator! Ready to master IP subnetting? Here's how:</p>
+<ul>
+    <li>🔢 <strong>Input IP & Subnet Mask:</strong> Enter the IP address and subnet mask in the designated fields. Use
+        the
+        format
+        <strong style="color: red;">"xxx.xxx.xxx.xxx"</strong> for IP address and subnet bits <strong
+            style="color: red;">"xx"</strong> mask.
+    </li>
+    <li>🚀 <strong>Calculate:</strong> Click "Calculate" to process the input and generate subnet details.</li>
+    <li>📊 <strong>View Results:</strong> Explore subnet details including CIDR notation, subnet bits, subnet mask,
+        wildcard mask, network & broadcast addresses, and assignable hosts.</li>
+    <li>👩‍💻 <strong>Example:</strong> Input "192.168.1.1" for the IP address and "24" for the subnet mask to see an
+        example.</li>
+</ul>
+
+Happy subnetting!
+{% endblock %}

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'lookups',
     'configGuardian',
     'controlTower',
+    'subnetCalc',
 
     #django apps
     'django.contrib.admin',
