@@ -8,7 +8,7 @@ class SSLCertificate(models.Model):
     remaining_days = models.IntegerField()
 
     def __str__(self):
-        return self.domain
+        return f'{self.domain} - {self.remaining_days}'
     
 
 class EmailConfig(models.Model):

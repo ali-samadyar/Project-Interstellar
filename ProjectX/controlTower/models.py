@@ -8,4 +8,4 @@ class SMTPConfiguration(models.Model):
     smtp_server_port = models.IntegerField()
 
     def __str__(self):
-        return self.smtp_name
+        return f'{self.smtp_name} - {self.smtp_sender} - {self.smtp_server}'

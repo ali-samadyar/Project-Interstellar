@@ -9,3 +9,6 @@ class Device(models.Model):
     model = models.CharField(max_length=255, blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)
     rack_loc = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.device_name} - {self.ip_address}'
