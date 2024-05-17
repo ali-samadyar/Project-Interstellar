@@ -581,17 +581,17 @@ h2 {
     position: absolute;
     z-index: 0;
     opacity: 0.18;
-    width: 800px;
-    left: 300px;
+    width: 700px;
+    left: 500px;
 }
 
 .about-image-1 {
     position: absolute;
     z-index: 0;
     opacity: 0.15;
-    width: 600px;
-    left: 410px;
-    top: 860px;
+    width: 500px;
+    left: 610px;
+    top: 800px;
 }
 
 
