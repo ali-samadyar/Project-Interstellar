@@ -34,6 +34,7 @@
                         <option value="{{ email_config.smtp_name }}">{{ email_config.smtp_name }}</option>
                         {% endfor %}
                     </select>
+                    <br></br>
                     <label for="receiver">Email Receiver(s):</label>
                     <input type="text" id="receiver" name="receiver">
                     <button type="button" onclick="saveEmailConfig()">Save</button>

@@ -103,7 +103,7 @@ def test_email(request):
     email_sent = False  # Flag to track if any email was sent
     for domain in domains:
         remaining_days = domain.remaining_days
-        if remaining_days in [35, 40, 56]:
+        if remaining_days in [7, 69, 70]:
             email_config = EmailConfig.objects.first()  # for when there is only one email configuration
             smtp_config = SMTPConfiguration.objects.get(smtp_name=email_config.smtp_name)
             try:
